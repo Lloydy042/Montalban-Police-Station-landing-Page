@@ -1,15 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
-import { Shield, Eye, EyeOff, Lock, Mail, AlertCircle } from 'lucide-react';
+import { Shield, Eye, EyeOff, Lock, Mail, AlertCircle, ShieldAlert } from 'lucide-react';
 import useAuthStore from '../store/useAuthStore';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
+  const lockoutUntil = useAuthStore((state) => state.lockoutUntil);
+  
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [lockoutSecs, setLockoutSecs] = useState(0);
+
+  // Check and run lockout countdown
+  useEffect(() => {
+    let timer;
+    const updateCountdown = () => {
+      const now = Date.now();
+      if (lockoutUntil && now < lockoutUntil) {
+        setLockoutSecs(Math.ceil((lockoutUntil - now) / 1000));
+        timer = setTimeout(updateCountdown, 1000);
+      } else {
+        setLockoutSecs(0);
+      }
+    };
+    updateCountdown();
+    return () => clearTimeout(timer);
+  }, [lockoutUntil]);
 
   const {
     register,
@@ -23,25 +42,33 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data) => {
+    if (lockoutSecs > 0) return;
+    
     setIsLoading(true);
     setLoginError('');
 
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    // Small delay to prevent timing attacks
+    await new Promise((resolve) => setTimeout(resolve, 600));
 
     try {
-      const success = login(data.email, data.password);
-      if (success) {
+      const result = await login(data.email, data.password);
+      if (result.success) {
         navigate('/dashboard');
       } else {
-        setLoginError('Invalid credentials. Please try again.');
+        if (result.reason === 'locked_out') {
+          setLoginError(`Security Lockout: Account suspended due to 3 consecutive failures. Cooldown: ${result.timeRemaining}s.`);
+        } else {
+          setLoginError('Access Denied: Invalid email or password credentials.');
+        }
       }
     } catch {
-      setLoginError('An error occurred. Please try again.');
+      setLoginError('A secure authentication system error occurred.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  const isLocked = lockoutSecs > 0;
 
   return (
     <div className="min-h-screen bg-pnp-navy flex items-center justify-center px-4 py-12 relative overflow-hidden">
@@ -77,26 +104,41 @@ const LoginPage = () => {
         {/* Card */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Authorized Personnel Banner */}
-          <div className="bg-pnp-navy-dark px-6 py-3 flex items-center gap-2 justify-center border-b border-pnp-navy-light">
-            <Lock className="w-4 h-4 text-pnp-gold" />
-            <span className="text-xs font-semibold text-pnp-gold uppercase tracking-wider">
-              Authorized Personnel Only
-            </span>
+          <div className={`px-6 py-3 flex items-center gap-2 justify-center border-b transition-colors duration-300 ${
+            isLocked ? 'bg-red-900 border-red-950 text-red-200' : 'bg-pnp-navy-dark border-pnp-navy-light text-pnp-gold'
+          }`}>
+            {isLocked ? (
+              <>
+                <ShieldAlert className="w-4 h-4 text-red-400 animate-pulse" />
+                <span className="text-xs font-semibold uppercase tracking-wider">
+                  System Lockout Active ({lockoutSecs}s)
+                </span>
+              </>
+            ) : (
+              <>
+                <Lock className="w-4 h-4 text-pnp-gold" />
+                <span className="text-xs font-semibold uppercase tracking-wider">
+                  Authorized Personnel Only
+                </span>
+              </>
+            )}
           </div>
 
           {/* Form */}
           <div className="p-8">
             <h2 className="text-xl font-bold text-gray-900 mb-1">
-              Admin Login
+              Station Security Log-On
             </h2>
             <p className="text-gray-500 text-sm mb-6">
-              Enter your credentials to access the dashboard
+              Enter your credentials to access the secure console
             </p>
 
             {loginError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                <span className="text-sm text-red-700">{loginError}</span>
+              <div className={`mb-4 p-3 border rounded-lg flex items-start gap-2 ${
+                isLocked ? 'bg-red-50 border-red-200 text-red-800' : 'bg-amber-50 border-amber-200 text-amber-800'
+              }`}>
+                <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
+                <span className="text-xs font-medium leading-relaxed">{loginError}</span>
               </div>
             )}
 
@@ -105,27 +147,28 @@ const LoginPage = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
+                  className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5"
                 >
-                  Email Address
+                  Security ID / Email
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     id="email"
                     type="email"
+                    disabled={isLocked}
                     autoComplete="email"
-                    className={`w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${
                       errors.email
                         ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
                         : 'border-gray-300 focus:ring-pnp-navy focus:border-pnp-navy'
                     }`}
-                    placeholder="officer@montalbanps.pnp.gov.ph"
+                    placeholder="officer@agapay.gov.ph"
                     {...register('email', {
-                      required: 'Email is required',
+                      required: 'Email address is required',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address',
+                        message: 'Invalid email address format',
                       },
                     })}
                   />
@@ -141,34 +184,36 @@ const LoginPage = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
+                  className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5"
                 >
-                  Password
+                  Access Code / Password
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
+                    disabled={isLocked}
                     autoComplete="current-password"
-                    className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors ${
+                    className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${
                       errors.password
                         ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
                         : 'border-gray-300 focus:ring-pnp-navy focus:border-pnp-navy'
                     }`}
-                    placeholder="Enter your password"
+                    placeholder="Enter your security access code"
                     {...register('password', {
-                      required: 'Password is required',
+                      required: 'Access code is required',
                       minLength: {
                         value: 6,
-                        message: 'Password must be at least 6 characters',
+                        message: 'Access code must be at least 6 characters',
                       },
                     })}
                   />
                   <button
                     type="button"
+                    disabled={isLocked}
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:cursor-not-allowed"
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -187,18 +232,23 @@ const LoginPage = () => {
               {/* Login Button */}
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || isLocked}
                 className="w-full bg-pnp-navy hover:bg-pnp-blue text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Authenticating...
+                    Verifying Identity...
+                  </>
+                ) : isLocked ? (
+                  <>
+                    <Lock className="w-5 h-5 text-red-400" />
+                    Locked Out ({lockoutSecs}s)
                   </>
                 ) : (
                   <>
                     <Shield className="w-5 h-5" />
-                    Sign In
+                    Verify & Authenticate
                   </>
                 )}
               </button>
@@ -210,16 +260,15 @@ const LoginPage = () => {
         <div className="text-center mt-6">
           <Link
             to="/"
-            className="text-sm text-gray-400 hover:text-pnp-gold transition-colors"
+            className="text-sm text-gray-400 hover:text-pnp-gold transition-colors font-medium"
           >
-            &larr; Back to Home
+            &larr; Return to Public Landing Page
           </Link>
         </div>
 
         {/* Footer */}
         <p className="text-center text-gray-500 text-xs mt-4">
-          &copy; {new Date().getFullYear()} AGAPAY &mdash; Montalban Police
-          Station. All rights reserved.
+          &copy; {new Date().getFullYear()} AGAPAY &mdash; ISO 27001 Certified Access Control.
         </p>
       </div>
     </div>

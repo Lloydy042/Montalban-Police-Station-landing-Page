@@ -16,12 +16,38 @@ const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
   const location = useLocation();
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
+
+  // ISO 27001 Clear Screen Session Timeout
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    let inactivityTimer;
+
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        alert('Security Alert: You have been logged out due to 15 minutes of inactivity (ISO 27001 Clear Screen Policy).');
+        logout();
+      }, 15 * 60 * 1000); // 15 minutes
+    };
+
+    const events = ['mousemove', 'keydown', 'scroll', 'click'];
+    events.forEach((event) => window.addEventListener(event, resetTimer, { passive: true }));
+
+    resetTimer();
+
+    return () => {
+      clearTimeout(inactivityTimer);
+      events.forEach((event) => window.removeEventListener(event, resetTimer));
+    };
+  }, [isAuthenticated, logout]);
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
