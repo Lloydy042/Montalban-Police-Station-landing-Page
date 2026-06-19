@@ -1,8 +1,9 @@
-import { Calendar, User, ShieldAlert, Info } from 'lucide-react';
-import { mockAnnouncements, mockSafetyAdvisories } from '../../data/mockData';
+import useAnnouncementStore from '../../store/useAnnouncementStore';
+import { mockSafetyAdvisories } from '../../data/mockData';
 
 export default function Announcements() {
-  const publishedAnnouncements = mockAnnouncements.filter((ann) => ann.is_published);
+  const announcements = useAnnouncementStore((state) => state.announcements);
+  const publishedAnnouncements = announcements.filter((ann) => ann.is_published);
 
   const formatDate = (dateString) => {
     if (!dateString) return '';

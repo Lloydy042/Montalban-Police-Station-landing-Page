@@ -23,7 +23,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import useReportStore from '../../store/useReportStore';
-import { mockOfficers } from '../../data/mockData';
+import useOfficerStore from '../../store/useOfficerStore';
 
 // Fix Leaflet marker icon issue
 const DefaultIcon = L.icon({
@@ -42,6 +42,7 @@ export default function ReportDetailPage() {
   const reports = useReportStore((state) => state.reports);
   const updateReportStatus = useReportStore((state) => state.updateReportStatus);
   const assignOfficer = useReportStore((state) => state.assignOfficer);
+  const officers = useOfficerStore((state) => state.officers);
 
   const report = reports.find((r) => r.id === id);
 
@@ -421,7 +422,7 @@ export default function ReportDetailPage() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-gray-700 bg-gray-50"
               >
                 <option value="">-- Select Field Officer --</option>
-                {mockOfficers.map((o) => (
+                {officers.map((o) => (
                   <option key={o.id} value={o.name}>
                     {o.name} ({o.rank}) — {o.status}
                   </option>

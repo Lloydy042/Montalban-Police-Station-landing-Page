@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import {
-  Users,
   Shield,
   Phone,
-  UserCheck,
-  ToggleLeft,
-  ToggleRight,
-  AlertTriangle,
   Plus,
   Trash2,
-  Lock,
 } from 'lucide-react';
-import { mockOfficers } from '../../data/mockData';
+import useOfficerStore from '../../store/useOfficerStore';
 
 export default function OfficersPage() {
-  const [officers, setOfficers] = useState(mockOfficers);
+  const officers = useOfficerStore((state) => state.officers);
+  const addOfficer = useOfficerStore((state) => state.addOfficer);
+  const updateOfficerStatus = useOfficerStore((state) => state.updateOfficerStatus);
+  const deleteOfficer = useOfficerStore((state) => state.deleteOfficer);
+
   const [showAddForm, setShowAddForm] = useState(false);
   const [form, setForm] = useState({
     name: '',
@@ -37,42 +35,32 @@ export default function OfficersPage() {
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteOfficer = (id) => {
     if (confirm('Are you sure you want to delete this officer record?')) {
-      setOfficers((prev) => prev.filter((o) => o.id !== id));
+      deleteOfficer(id);
     }
   };
 
-  const handleToggleStatus = (id) => {
-    setOfficers((prev) =>
-      prev.map((o) => {
-        if (o.id === id) {
-          const nextStatus =
-            o.status === 'Available'
-              ? 'On Assignment'
-              : o.status === 'On Assignment'
-              ? 'Off Duty'
-              : 'Available';
-          return { ...o, status: nextStatus };
-        }
-        return o;
-      })
-    );
+  const handleToggleStatus = (id, currentStatus) => {
+    const nextStatus =
+      currentStatus === 'Available'
+        ? 'On Assignment'
+        : currentStatus === 'On Assignment'
+        ? 'Off Duty'
+        : 'Available';
+    updateOfficerStatus(id, nextStatus);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newOfficer = {
-      id: `OFF-${String(officers.length + 1).padStart(3, '0')}`,
+    addOfficer({
       name: form.name,
       rank: form.rank,
       badgeNumber: form.badgeNumber,
       contact: form.contact,
       status: form.status,
-      currentAssignment: null,
-    };
-
-    setOfficers((prev) => [...prev, newOfficer]);
+    });
+    
     setShowAddForm(false);
     setForm({
       name: '',
@@ -205,7 +193,7 @@ export default function OfficersPage() {
                 </span>
               </div>
               <span
-                onClick={() => handleToggleStatus(officer.id)}
+                onClick={() => handleToggleStatus(officer.id, officer.status)}
                 className={`px-2 py-0.5 border text-[10px] font-extrabold uppercase rounded tracking-wider cursor-pointer select-none transition-colors ${getStatusClass(
                   officer.status
                 )}`}
@@ -246,7 +234,7 @@ export default function OfficersPage() {
                   </div>
                 ) : officer.status === 'On Assignment' ? (
                   <div className="bg-blue-50/50 border border-blue-200/50 rounded-lg p-2.5 text-xs text-blue-900 font-medium italic">
-                    Assigned to Active Case (RPT-2026-0005)
+                    Assigned to Active Case
                   </div>
                 ) : (
                   <div className="text-xs text-gray-400 italic">
@@ -262,7 +250,7 @@ export default function OfficersPage() {
                 Authorized Personnel
               </span>
               <button
-                onClick={() => handleDelete(officer.id)}
+                onClick={() => handleDeleteOfficer(officer.id)}
                 className="p-1.5 hover:bg-red-50 rounded text-gray-400 hover:text-red-600 transition-all"
                 title="Remove Officer Record"
               >

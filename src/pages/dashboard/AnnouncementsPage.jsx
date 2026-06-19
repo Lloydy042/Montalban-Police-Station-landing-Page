@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import {
   Megaphone,
-  Plus,
   Trash2,
-  CheckCircle,
-  XCircle,
   Calendar,
   User,
-  Eye,
   Edit,
-  AlertCircle,
   Check,
 } from 'lucide-react';
-import { mockAnnouncements } from '../../data/mockData';
+import useAnnouncementStore from '../../store/useAnnouncementStore';
 
 export default function AnnouncementsPage() {
-  const [announcements, setAnnouncements] = useState(mockAnnouncements);
+  const announcements = useAnnouncementStore((state) => state.announcements);
+  const addAnnouncement = useAnnouncementStore((state) => state.addAnnouncement);
+  const updateAnnouncement = useAnnouncementStore((state) => state.updateAnnouncement);
+  const deleteAnnouncement = useAnnouncementStore((state) => state.deleteAnnouncement);
+  const togglePublish = useAnnouncementStore((state) => state.togglePublish);
+
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   
@@ -29,16 +29,12 @@ export default function AnnouncementsPage() {
 
   const handleDelete = (id) => {
     if (confirm('Are you sure you want to delete this announcement?')) {
-      setAnnouncements((prev) => prev.filter((ann) => ann.id !== id));
+      deleteAnnouncement(id);
     }
   };
 
   const handleTogglePublish = (id) => {
-    setAnnouncements((prev) =>
-      prev.map((ann) =>
-        ann.id === id ? { ...ann, is_published: !ann.is_published, datePublished: ann.is_published ? null : new Date().toISOString() } : ann
-      )
-    );
+    togglePublish(id);
   };
 
   const handleEdit = (ann) => {
@@ -51,7 +47,7 @@ export default function AnnouncementsPage() {
       author: ann.author,
       is_published: ann.is_published,
     });
-    // Scroll form into view or focus
+    // Scroll form into view
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -59,34 +55,23 @@ export default function AnnouncementsPage() {
     e.preventDefault();
 
     if (isEditing) {
-      setAnnouncements((prev) =>
-        prev.map((ann) =>
-          ann.id === editingId
-            ? {
-                ...ann,
-                title: form.title,
-                content: form.content,
-                category: form.category,
-                author: form.author,
-                is_published: form.is_published,
-                datePublished: form.is_published ? ann.datePublished || new Date().toISOString() : null,
-              }
-            : ann
-        )
-      );
-      setIsEditing(false);
-      setEditingId(null);
-    } else {
-      const newAnn = {
-        id: `ANN-${String(announcements.length + 1).padStart(3, '0')}`,
+      updateAnnouncement(editingId, {
         title: form.title,
         content: form.content,
         category: form.category,
         author: form.author,
         is_published: form.is_published,
-        datePublished: form.is_published ? new Date().toISOString() : null,
-      };
-      setAnnouncements((prev) => [newAnn, ...prev]);
+      });
+      setIsEditing(false);
+      setEditingId(null);
+    } else {
+      addAnnouncement({
+        title: form.title,
+        content: form.content,
+        category: form.category,
+        author: form.author,
+        is_published: form.is_published,
+      });
     }
 
     // Reset form
