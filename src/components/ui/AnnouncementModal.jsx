@@ -16,10 +16,13 @@ export default function AnnouncementModal({ announcement, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300"
+      onClick={onClose}
+    >
       {/* Modal Container */}
       <div 
-        className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cover Image */}
