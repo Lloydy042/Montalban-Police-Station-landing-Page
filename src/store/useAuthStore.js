@@ -17,16 +17,18 @@ const USERS = {
   'admin@agapay.gov.ph': {
     uid: 'USR-ADMIN-001',
     name: 'PLTCOL. Ernesto V. Mabini',
+    email: 'admin@agapay.gov.ph',
     role: 'administrator',
     station: 'Montalban Police Station',
-    passwordHash: 'd94943fcf3bc102555543dbd23f3a9e3a6a9be88a2618991a0c4987010f3c5f5',
+    passwordHash: 'ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270',
   },
   'officer@agapay.gov.ph': {
     uid: 'USR-DESK-001',
     name: 'Desk Officer Martinez',
+    email: 'officer@agapay.gov.ph',
     role: 'desk_officer',
     station: 'Montalban Police Station',
-    passwordHash: '8b19e27c1f80f1d5e6a394ec5662bb1e2c90c7cd7cb53f2cfbb30cbfd0bc261a',
+    passwordHash: '2376c1f5ae2597546cd751a737aeb63c5b23163d634c31319ba98c9acc3e7cbd',
   }
 };
 
