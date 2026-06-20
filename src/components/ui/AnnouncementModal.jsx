@@ -17,12 +17,12 @@ export default function AnnouncementModal({ announcement, onClose }) {
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300"
+      className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-all duration-300"
       onClick={onClose}
     >
       {/* Modal Container */}
       <div 
-        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cover Image */}
@@ -60,7 +60,7 @@ export default function AnnouncementModal({ announcement, onClose }) {
         </button>
 
         {/* Content Body */}
-        <div className="p-6 sm:p-8 space-y-5">
+        <div className="p-6 sm:p-8 space-y-5 overflow-y-auto flex-1">
           {/* Metadata */}
           <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500 pb-4 border-b border-gray-150">
             <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export default function AnnouncementModal({ announcement, onClose }) {
           )}
 
           {/* Post Description */}
-          <div className="text-sm sm:text-base text-gray-650 leading-relaxed space-y-4 max-h-[300px] overflow-y-auto pr-2">
+          <div className="text-sm sm:text-base text-gray-650 leading-relaxed space-y-4">
             <p className="whitespace-pre-wrap">{announcement.content}</p>
           </div>
 

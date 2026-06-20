@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden bg-pnp-navy"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-pnp-navy pt-16 lg:pt-20 pb-12"
     >
       {/* Background pattern overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-pnp-navy via-pnp-navy-light to-pnp-blue opacity-100" />
@@ -16,7 +16,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-28 lg:py-0">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text content */}
           <div className="text-center lg:text-left">
