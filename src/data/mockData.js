@@ -455,7 +455,8 @@ export const mockAnnouncements = [
     author: 'PLTCOL. Ernesto V. Mabini',
     datePublished: '2026-06-10T10:00:00',
     is_published: true,
-    category: 'Operations'
+    category: 'Operations',
+    image: 'https://images.unsplash.com/photo-1596727147705-61a532a659bd?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'ANN-002',
@@ -464,7 +465,8 @@ export const mockAnnouncements = [
     author: 'Montalban Police Station',
     datePublished: '2026-06-05T08:00:00',
     is_published: true,
-    category: 'Advisory'
+    category: 'Advisory',
+    image: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'ANN-003',
@@ -473,7 +475,8 @@ export const mockAnnouncements = [
     author: 'Montalban Police Station',
     datePublished: '2026-05-20T09:00:00',
     is_published: true,
-    category: 'Announcement'
+    category: 'Announcement',
+    image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'ANN-004',
@@ -482,7 +485,8 @@ export const mockAnnouncements = [
     author: 'PLTCOL. Ernesto V. Mabini',
     datePublished: '2026-06-12T14:00:00',
     is_published: true,
-    category: 'Event'
+    category: 'Event',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'ANN-005',
@@ -491,7 +495,8 @@ export const mockAnnouncements = [
     author: 'Montalban Police Station',
     datePublished: '2026-06-08T11:00:00',
     is_published: true,
-    category: 'Operations'
+    category: 'Operations',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'ANN-006',
@@ -500,7 +505,8 @@ export const mockAnnouncements = [
     author: 'Admin',
     datePublished: null,
     is_published: false,
-    category: 'Internal'
+    category: 'Internal',
+    image: null
   }
 ];
 

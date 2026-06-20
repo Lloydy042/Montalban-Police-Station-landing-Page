@@ -1,9 +1,13 @@
+import { useState } from 'react';
+import { Calendar, User, ShieldAlert, Info } from 'lucide-react';
 import useAnnouncementStore from '../../store/useAnnouncementStore';
 import { mockSafetyAdvisories } from '../../data/mockData';
+import AnnouncementModal from '../ui/AnnouncementModal';
 
 export default function Announcements() {
   const announcements = useAnnouncementStore((state) => state.announcements);
   const publishedAnnouncements = announcements.filter((ann) => ann.is_published);
+  const [activeAnnouncement, setActiveAnnouncement] = useState(null);
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -39,31 +43,46 @@ export default function Announcements() {
               {publishedAnnouncements.map((ann) => (
                 <article
                   key={ann.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-0.5"
+                  onClick={() => setActiveAnnouncement(ann)}
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden group cursor-pointer"
                 >
-                  <div className="p-6 flex-1 flex flex-col">
-                    {/* Category tag */}
-                    <div className="mb-4">
-                      <span className="inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-pnp-navy/5 text-pnp-navy border border-pnp-navy/10 rounded">
-                        {ann.category}
-                      </span>
+                  {/* Card Thumbnail */}
+                  {ann.image && (
+                    <div className="h-44 w-full overflow-hidden bg-gray-150 relative">
+                      <img 
+                        src={ann.image} 
+                        alt={ann.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
+                    </div>
+                  )}
+
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Category tag */}
+                      <div className="mb-3">
+                        <span className="inline-block px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-pnp-navy/5 text-pnp-navy border border-pnp-navy/10 rounded">
+                          {ann.category}
+                        </span>
+                      </div>
+
+                      <h4 className="text-base font-bold text-pnp-navy leading-snug mb-2 group-hover:text-pnp-gold transition-colors duration-250">
+                        {ann.title}
+                      </h4>
+
+                      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
+                        {ann.content}
+                      </p>
                     </div>
 
-                    <h4 className="text-lg font-bold text-pnp-navy leading-snug mb-3 group-hover:text-pnp-gold transition-colors duration-250">
-                      {ann.title}
-                    </h4>
-
-                    <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1 line-clamp-4">
-                      {ann.content}
-                    </p>
-
                     {/* Metadata */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400 pt-4 border-t border-gray-100">
-                      <span className="flex items-center gap-1.5 font-medium text-gray-500">
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] sm:text-xs text-gray-405 pt-4 border-t border-gray-100 mt-auto">
+                      <span className="flex items-center gap-1 font-medium text-gray-500">
                         <User className="w-3.5 h-3.5" />
                         {ann.author}
                       </span>
-                      <span className="flex items-center gap-1.5">
+                      <span className="flex items-center gap-1 text-gray-400">
                         <Calendar className="w-3.5 h-3.5" />
                         {formatDate(ann.datePublished)}
                       </span>
@@ -174,6 +193,14 @@ export default function Announcements() {
           </div>
         </div>
       </div>
+
+      {/* Interactive Detail Modal */}
+      {activeAnnouncement && (
+        <AnnouncementModal 
+          announcement={activeAnnouncement} 
+          onClose={() => setActiveAnnouncement(null)} 
+        />
+      )}
     </section>
   );
 }
