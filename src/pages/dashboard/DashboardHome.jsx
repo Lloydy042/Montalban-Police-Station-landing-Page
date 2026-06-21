@@ -10,6 +10,7 @@ import {
   MapPin,
   Plus,
   Megaphone,
+  HelpCircle,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -84,6 +85,39 @@ export default function DashboardHome() {
         return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getVerificationClass = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      case 'hoax':
+        return 'bg-rose-50 text-rose-700 border border-rose-200';
+      default:
+        return 'bg-gray-50 text-gray-500 border border-gray-200';
+    }
+  };
+
+  const getVerificationIcon = (status) => {
+    switch (status) {
+      case 'verified':
+        return <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />;
+      case 'hoax':
+        return <AlertTriangle className="w-3 h-3 text-rose-600 shrink-0" />;
+      default:
+        return <HelpCircle className="w-3 h-3 text-gray-400 shrink-0" />;
+    }
+  };
+
+  const getVerificationLabel = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'Verified Real';
+      case 'hoax':
+        return 'Hoax / Fake';
+      default:
+        return 'Unverified';
     }
   };
 
@@ -311,6 +345,7 @@ export default function DashboardHome() {
                 <th className="px-6 py-3.5">Barangay</th>
                 <th className="px-6 py-3.5">Severity</th>
                 <th className="px-6 py-3.5">Status</th>
+                <th className="px-6 py-3.5">Verification</th>
                 <th className="px-6 py-3.5">Date Submitted</th>
                 <th className="px-6 py-3.5 text-right">Actions</th>
               </tr>
@@ -344,6 +379,16 @@ export default function DashboardHome() {
                       )}`}
                     >
                       {report.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationClass(
+                        report.verificationStatus
+                      )}`}
+                    >
+                      {getVerificationIcon(report.verificationStatus)}
+                      {getVerificationLabel(report.verificationStatus)}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-xs text-gray-400">

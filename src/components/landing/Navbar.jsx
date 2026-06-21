@@ -51,7 +51,7 @@ export default function Navbar() {
                 AGAPAY
               </span>
               <span className="hidden sm:block text-gray-300 text-[11px] tracking-wide">
-                Rodriguez Municipal Police Station
+                Montalban Police Station
               </span>
             </div>
           </a>

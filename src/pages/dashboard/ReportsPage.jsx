@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Search, X, AlertCircle, ShieldAlert, Eye, Plus } from 'lucide-react';
+import { Search, X, AlertCircle, ShieldAlert, Eye, Plus, CheckCircle2, AlertTriangle, HelpCircle } from 'lucide-react';
 import useReportStore from '../../store/useReportStore';
 import { incidentTypes } from '../../data/mockData';
 
@@ -49,6 +49,39 @@ export default function ReportsPage() {
     }
   };
 
+  const getVerificationClass = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      case 'hoax':
+        return 'bg-rose-50 text-rose-700 border border-rose-200';
+      default:
+        return 'bg-gray-50 text-gray-500 border border-gray-200';
+    }
+  };
+
+  const getVerificationIcon = (status) => {
+    switch (status) {
+      case 'verified':
+        return <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />;
+      case 'hoax':
+        return <AlertTriangle className="w-3 h-3 text-rose-600 shrink-0" />;
+      default:
+        return <HelpCircle className="w-3 h-3 text-gray-400 shrink-0" />;
+    }
+  };
+
+  const getVerificationLabel = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'Verified Real';
+      case 'hoax':
+        return 'Hoax / Fake';
+      default:
+        return 'Unverified';
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -64,7 +97,8 @@ export default function ReportsPage() {
     filters.search !== '' ||
     filters.status !== 'All' ||
     filters.type !== 'All' ||
-    filters.severity !== 'All';
+    filters.severity !== 'All' ||
+    (filters.verification && filters.verification !== 'All');
 
   return (
     <div className="space-y-6">
@@ -93,7 +127,7 @@ export default function ReportsPage() {
 
       {/* Filter panel */}
       <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Search Input */}
           <div className="md:col-span-1 relative">
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -151,6 +185,20 @@ export default function ReportsPage() {
               <option value="Critical">Critical</option>
             </select>
           </div>
+
+          {/* Verification Filter */}
+          <div>
+            <select
+              value={filters.verification || 'All'}
+              onChange={(e) => handleSelectFilter('verification', e.target.value)}
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all text-gray-750"
+            >
+              <option value="All">All Verifications</option>
+              <option value="unverified">Unverified</option>
+              <option value="verified">Verified Real</option>
+              <option value="hoax">Fake / Hoax</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -180,6 +228,7 @@ export default function ReportsPage() {
                   <th className="px-6 py-3.5">Barangay</th>
                   <th className="px-6 py-3.5">Severity</th>
                   <th className="px-6 py-3.5">Status</th>
+                  <th className="px-6 py-3.5">Verification</th>
                   <th className="px-6 py-3.5">Assigned Officer</th>
                   <th className="px-6 py-3.5">Date Submitted</th>
                   <th className="px-6 py-3.5 text-right">Actions</th>
@@ -216,6 +265,16 @@ export default function ReportsPage() {
                         )}`}
                       >
                         {report.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationClass(
+                          report.verificationStatus
+                        )}`}
+                      >
+                        {getVerificationIcon(report.verificationStatus)}
+                        {getVerificationLabel(report.verificationStatus)}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-gray-600 font-medium">

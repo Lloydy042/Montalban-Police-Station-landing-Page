@@ -14,6 +14,8 @@ import {
   Info,
   Clock,
   ExternalLink,
+  HelpCircle,
+  ShieldCheck,
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -22,6 +24,7 @@ import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+import useAuthStore from '../../store/useAuthStore';
 import useReportStore from '../../store/useReportStore';
 import useOfficerStore from '../../store/useOfficerStore';
 
@@ -42,7 +45,9 @@ export default function ReportDetailPage() {
   const reports = useReportStore((state) => state.reports);
   const updateReportStatus = useReportStore((state) => state.updateReportStatus);
   const assignOfficer = useReportStore((state) => state.assignOfficer);
+  const verifyReport = useReportStore((state) => state.verifyReport);
   const officers = useOfficerStore((state) => state.officers);
+  const currentUser = useAuthStore((state) => state.user);
 
   const report = reports.find((r) => r.id === id);
 
@@ -54,6 +59,14 @@ export default function ReportDetailPage() {
   );
   const [timelineNotes, setTimelineNotes] = useState('');
 
+  // Verification states
+  const [selectedVerification, setSelectedVerification] = useState(
+    report?.verificationStatus || 'unverified'
+  );
+  const [verificationRemarks, setVerificationRemarks] = useState(
+    report?.verificationNotes || ''
+  );
+
   // Setup audit log state for demonstration purposes
   const [auditLog, setAuditLog] = useState([
     {
@@ -62,6 +75,16 @@ export default function ReportDetailPage() {
       date: report?.dateSubmitted ? new Date(report.dateSubmitted).toISOString() : new Date().toISOString(),
       note: `Report submitted via citizens mobile app (${report?.channel || 'app'}).`,
     },
+    ...(report?.verificationStatus && report.verificationStatus !== 'unverified'
+      ? [
+          {
+            action: report.verificationStatus === 'verified' ? 'Report Verified Real' : 'Report Marked as Hoax/Fake',
+            officer: report.verifiedBy || 'System Administrator',
+            date: report.verificationDate || report.dateSubmitted,
+            note: report.verificationNotes || 'Assessment completed.',
+          }
+        ]
+      : []),
     ...(report?.assignedOfficer
       ? [
           {
@@ -152,6 +175,27 @@ export default function ReportDetailPage() {
     alert('Incident report successfully updated!');
   };
 
+  const handleVerify = () => {
+    const verifierName = currentUser?.name || 'PLTCOL. Ernesto V. Mabini';
+    verifyReport(report.id, selectedVerification, verifierName, verificationRemarks);
+    
+    setAuditLog((prev) => [
+      ...prev,
+      {
+        action: selectedVerification === 'verified' 
+          ? 'Report Verified Real' 
+          : selectedVerification === 'hoax' 
+            ? 'Report Marked as Hoax/Fake' 
+            : 'Verification Reset to Pending',
+        officer: verifierName,
+        date: new Date().toISOString(),
+        note: verificationRemarks || 'Assessment completed.',
+      },
+    ]);
+    
+    alert('Verification status updated successfully!');
+  };
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'Pending':
@@ -197,6 +241,28 @@ export default function ReportDetailPage() {
     }
   };
 
+  const getVerificationColor = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'bg-emerald-100 text-emerald-800';
+      case 'hoax':
+        return 'bg-rose-100 text-rose-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getVerificationLabel = (status) => {
+    switch (status) {
+      case 'verified':
+        return 'Verified Real';
+      case 'hoax':
+        return 'Fake / Hoax';
+      default:
+        return 'Unverified';
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -237,6 +303,13 @@ export default function ReportDetailPage() {
             >
               {report.status}
             </span>
+            <span
+              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationColor(
+                report.verificationStatus
+              )}`}
+            >
+              {getVerificationLabel(report.verificationStatus)}
+            </span>
           </div>
           <h2 className="text-xl font-bold text-pnp-navy mt-1">
             {report.type} at Brgy. {report.barangay}
@@ -249,6 +322,29 @@ export default function ReportDetailPage() {
         <div className="lg:col-span-8 space-y-6">
           {/* Main info card */}
           <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-6">
+            {report.verificationStatus && report.verificationStatus !== 'unverified' && (
+              <div className={`p-4 rounded-xl border flex gap-3 ${
+                report.verificationStatus === 'verified'
+                  ? 'bg-emerald-50 border-emerald-250 text-emerald-800'
+                  : 'bg-rose-50 border-rose-250 text-rose-800'
+              }`}>
+                <ShieldCheck className={`w-5 h-5 shrink-0 mt-0.5 ${
+                  report.verificationStatus === 'verified' ? 'text-emerald-600' : 'text-rose-600'
+                }`} />
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider">
+                    Official Verification: {getVerificationLabel(report.verificationStatus)}
+                  </h4>
+                  <p className="text-xs mt-1 leading-relaxed">
+                    {report.verificationNotes || 'No verification notes provided.'}
+                  </p>
+                  <p className="text-[10px] opacity-75 mt-1.5 font-medium">
+                    Assessed by {report.verifiedBy} on {new Date(report.verificationDate).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            )}
+
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 mb-3">
                 Incident Description
@@ -480,8 +576,72 @@ export default function ReportDetailPage() {
             </div>
           </div>
 
+          {/* Incident Verification assessment card */}
+          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-5">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-pnp-gold" />
+              Incident Verification
+            </h3>
+
+            {/* Verification status selection */}
+            <div>
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                Assessment Status
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: 'unverified', label: 'Unverified', color: 'border-gray-200 text-gray-650' },
+                  { value: 'verified', label: 'Real Incident', color: 'border-emerald-250 text-emerald-705' },
+                  { value: 'hoax', label: 'Fake / Hoax', color: 'border-rose-250 text-rose-705' }
+                ].map((item) => (
+                  <button
+                    key={item.value}
+                    type="button"
+                    onClick={() => setSelectedVerification(item.value)}
+                    className={`py-2 px-1.5 border rounded-lg text-[10px] font-bold transition-all text-center ${
+                      selectedVerification === item.value
+                        ? item.value === 'verified'
+                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                          : item.value === 'hoax'
+                            ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
+                            : 'bg-gray-650 text-white border-gray-650 shadow-sm'
+                        : `bg-white hover:bg-gray-50 ${item.color}`
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Verification remarks */}
+            <div>
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                Verification Remarks
+              </label>
+              <textarea
+                value={verificationRemarks}
+                onChange={(e) => setVerificationRemarks(e.target.value)}
+                placeholder="Detail the outcome of verification calls, dispatch confirmations, or source validation..."
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-gray-700 bg-gray-50 resize-none"
+              />
+            </div>
+
+            {/* Save Verification button */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={handleVerify}
+                className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded-lg transition-colors shadow-sm text-sm"
+              >
+                Save Verification
+              </button>
+            </div>
+          </div>
+
           {/* Quick reference guide */}
-          <div className="bg-gray-50 p-5 rounded-2xl border border-gray-150 space-y-3">
+          <div className="bg-gray-50 p-5 rounded-2xl border border-gray-150 shadow-sm">
             <h4 className="text-xs font-bold text-pnp-navy uppercase tracking-wider flex items-center gap-1.5">
               <Info className="w-4 h-4 text-pnp-gold" />
               Standard Operating Procedure

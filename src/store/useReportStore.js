@@ -11,6 +11,7 @@ const useReportStore = create(
         status: 'All',
         type: 'All',
         severity: 'All',
+        verification: 'All',
       },
       
       setFilter: (key, value) => {
@@ -21,7 +22,7 @@ const useReportStore = create(
       
       resetFilters: () => {
         set({
-          filters: { search: '', status: 'All', type: 'All', severity: 'All' },
+          filters: { search: '', status: 'All', type: 'All', severity: 'All', verification: 'All' },
         });
       },
       
@@ -36,7 +37,9 @@ const useReportStore = create(
           const matchStatus = filters.status === 'All' || report.status === filters.status;
           const matchType = filters.type === 'All' || report.type === filters.type;
           const matchSeverity = filters.severity === 'All' || report.severity === filters.severity;
-          return matchSearch && matchStatus && matchType && matchSeverity;
+          const matchVerification = filters.verification === 'All' || 
+            (report.verificationStatus || 'unverified') === filters.verification;
+          return matchSearch && matchStatus && matchType && matchSeverity && matchVerification;
         });
       },
       
@@ -52,6 +55,22 @@ const useReportStore = create(
         set((state) => ({
           reports: state.reports.map((r) =>
             r.id === reportId ? { ...r, assignedOfficer: officerName, status: 'Assigned' } : r
+          ),
+        }));
+      },
+
+      verifyReport: (reportId, verificationStatus, verifierName, notes) => {
+        set((state) => ({
+          reports: state.reports.map((r) =>
+            r.id === reportId
+              ? {
+                  ...r,
+                  verificationStatus,
+                  verifiedBy: verifierName,
+                  verificationDate: new Date().toISOString(),
+                  verificationNotes: notes,
+                }
+              : r
           ),
         }));
       },
