@@ -87,7 +87,7 @@ const LoginPage = () => {
       <div className="w-full max-w-md relative z-10">
         {/* Logo / Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-pnp-gold/5 border border-pnp-gold rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-pnp-gold/5 border border-pnp-gold rounded mb-4">
             <Shield className="w-10 h-10 text-pnp-gold" />
           </div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight">

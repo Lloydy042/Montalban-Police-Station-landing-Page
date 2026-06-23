@@ -51,7 +51,7 @@ export default function About() {
                   : 'animate-fade-in-up animation-delay-400'
               }`}
             >
-              <div className="w-12 h-12 mx-auto rounded-full bg-slate-50 border border-gray-200 flex items-center justify-center mb-5 group-hover:bg-pnp-navy group-hover:border-pnp-gold transition-all duration-200">
+              <div className="w-12 h-12 mx-auto rounded bg-slate-50 border border-gray-200 flex items-center justify-center mb-5 group-hover:bg-pnp-navy group-hover:border-pnp-gold transition-all duration-200">
                 <Icon className="w-5 h-5 text-pnp-navy group-hover:text-pnp-gold transition-all duration-200" />
               </div>
               <h3 className="text-lg font-bold text-pnp-navy mb-3">{title}</h3>

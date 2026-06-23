@@ -57,7 +57,7 @@ export default function HowItWorks() {
               )}
 
               {/* Number circle */}
-              <div className="relative z-10 w-16 h-16 rounded-full bg-pnp-navy flex items-center justify-center mb-5 shadow-md border border-pnp-gold/20">
+              <div className="relative z-10 w-16 h-16 rounded bg-pnp-navy flex items-center justify-center mb-5 shadow-sm border border-pnp-gold/20">
                 <Icon className="w-6 h-6 text-pnp-gold" />
               </div>
 

@@ -21,7 +21,7 @@ export default function Hero() {
           {/* Text content */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-in-up">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-pnp-gold/10 border border-pnp-gold/20 text-pnp-gold rounded-full text-xs font-semibold tracking-wide uppercase mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1 bg-pnp-gold/10 border border-pnp-gold/30 text-pnp-gold rounded text-xs font-semibold tracking-wide uppercase mb-6">
                 <Shield className="w-3.5 h-3.5" />
                 Philippine National Police
               </span>
@@ -79,8 +79,8 @@ export default function Hero() {
 
                   {/* App content */}
                   <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-pnp-gold/10 border border-pnp-gold/30 flex items-center justify-center mb-4">
-                      <Shield className="w-9 h-9 text-pnp-gold" />
+                    <div className="w-14 h-14 rounded bg-pnp-gold/10 border border-pnp-gold/30 flex items-center justify-center mb-4">
+                      <Shield className="w-8 h-8 text-pnp-gold" />
                     </div>
                     <p className="text-white font-bold text-lg tracking-wide">AGAPAY</p>
                     <p className="text-pnp-gold text-[9px] mt-1 tracking-wider uppercase font-semibold">
@@ -89,13 +89,13 @@ export default function Hero() {
 
                     {/* Mock buttons */}
                     <div className="w-full mt-8 space-y-3 px-2">
-                      <div className="bg-pnp-gold rounded-xl py-3 text-pnp-navy text-xs font-bold shadow-sm">
+                      <div className="bg-pnp-gold rounded py-3 text-pnp-navy text-xs font-bold shadow-sm">
                         Report an Incident
                       </div>
-                      <div className="bg-white/5 border border-white/10 rounded-xl py-3 text-white text-xs font-semibold">
+                      <div className="bg-white/5 border border-white/10 rounded py-3 text-white text-xs font-semibold">
                         View My Reports
                       </div>
-                      <div className="bg-white/5 border border-white/10 rounded-xl py-3 text-white text-xs font-semibold">
+                      <div className="bg-white/5 border border-white/10 rounded py-3 text-white text-xs font-semibold">
                         Safety Alerts
                       </div>
                     </div>

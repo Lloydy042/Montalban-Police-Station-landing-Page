@@ -22,7 +22,7 @@ export default function AnnouncementModal({ announcement, onClose }) {
     >
       {/* Modal Container */}
       <div 
-        className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in max-h-[90vh] flex flex-col"
+        className="relative bg-white rounded shadow-2xl max-w-2xl w-full overflow-hidden border border-gray-150 animate-scale-in max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cover Image */}
@@ -53,10 +53,10 @@ export default function AnnouncementModal({ announcement, onClose }) {
         {/* Modal Header Actions */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors border border-white/10 shadow z-10"
+          className="absolute top-4 right-4 p-2 rounded bg-black/40 hover:bg-black/60 text-white transition-colors border border-white/10 shadow z-10"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {/* Content Body */}
@@ -64,7 +64,7 @@ export default function AnnouncementModal({ announcement, onClose }) {
           {/* Metadata */}
           <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500 pb-4 border-b border-gray-150">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-pnp-navy/5 flex items-center justify-center border border-pnp-navy/10 shrink-0">
+              <div className="w-8 h-8 rounded bg-pnp-navy/5 flex items-center justify-center border border-pnp-navy/10 shrink-0">
                 <User className="w-4 h-4 text-pnp-navy" />
               </div>
               <div>

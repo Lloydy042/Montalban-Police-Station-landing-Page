@@ -18,7 +18,7 @@ export default function Footer() {
           {/* Brand block */}
           <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-pnp-gold flex items-center justify-center">
+              <div className="w-10 h-10 rounded bg-pnp-gold flex items-center justify-center">
                 <Shield className="w-5.5 h-5.5 text-pnp-navy" strokeWidth={2.5} />
               </div>
               <span className="text-xl font-bold tracking-wider text-white">AGAPAY</span>

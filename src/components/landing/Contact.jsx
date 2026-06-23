@@ -149,7 +149,7 @@ export default function Contact() {
 
             {submitted ? (
               <div className="py-16 text-center">
-                <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
+                <div className="w-16 h-16 bg-green-50 text-green-600 rounded flex items-center justify-center mx-auto mb-4 border border-green-200">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">Message Sent Successfully!</h4>

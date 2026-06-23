@@ -94,7 +94,7 @@ export default function AnalyticsPage() {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+        <div className="bg-white p-5 rounded border border-gray-200 border-l-4 border-l-pnp-navy shadow-sm flex items-center gap-4">
           <div className="w-9 h-9 rounded bg-pnp-navy/5 text-pnp-navy flex items-center justify-center shrink-0 border border-pnp-navy/5">
             <FileText className="w-5 h-5" />
           </div>
@@ -106,7 +106,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+        <div className="bg-white p-5 rounded border border-gray-200 border-l-4 border-l-amber-500 shadow-sm flex items-center gap-4">
           <div className="w-9 h-9 rounded bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
             <Clock className="w-5 h-5" />
           </div>
@@ -118,7 +118,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+        <div className="bg-white p-5 rounded border border-gray-200 border-l-4 border-l-emerald-500 shadow-sm flex items-center gap-4">
           <div className="w-9 h-9 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
             <CheckCircle2 className="w-5 h-5" />
           </div>
@@ -130,7 +130,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+        <div className="bg-white p-5 rounded border border-gray-200 border-l-4 border-l-pnp-gold shadow-sm flex items-center gap-4">
           <div className="w-9 h-9 rounded bg-pnp-gold/10 text-pnp-gold flex items-center justify-center shrink-0 border border-pnp-gold/20">
             <TrendingUp className="w-5 h-5" />
           </div>

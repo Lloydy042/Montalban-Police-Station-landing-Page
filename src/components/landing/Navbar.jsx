@@ -43,7 +43,7 @@ export default function Navbar() {
             onClick={(e) => handleNavClick(e, '#home')}
             className="flex items-center gap-3 shrink-0"
           >
-            <div className="w-9 h-9 rounded-full bg-pnp-gold flex items-center justify-center">
+            <div className="w-9 h-9 rounded bg-pnp-gold flex items-center justify-center">
               <Shield className="w-5 h-5 text-pnp-navy" strokeWidth={2.5} />
             </div>
             <div className="leading-tight">
