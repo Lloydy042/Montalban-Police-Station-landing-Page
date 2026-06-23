@@ -44,15 +44,15 @@ export default function Announcements() {
                 <article
                   key={ann.id}
                   onClick={() => setActiveAnnouncement(ann)}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden group cursor-pointer"
+                  className="bg-white rounded-lg border border-gray-200 shadow-sm hover:border-pnp-gold/50 hover:shadow-md transition-all duration-200 flex flex-col overflow-hidden group cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2"
                 >
                   {/* Card Thumbnail */}
                   {ann.image && (
-                    <div className="h-44 w-full overflow-hidden bg-gray-150 relative">
+                    <div className="h-44 w-full overflow-hidden bg-gray-100 relative">
                       <img 
                         src={ann.image} 
                         alt={ann.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
                     </div>
@@ -62,28 +62,28 @@ export default function Announcements() {
                     <div>
                       {/* Category tag */}
                       <div className="mb-3">
-                        <span className="inline-block px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-pnp-navy/5 text-pnp-navy border border-pnp-navy/10 rounded">
+                        <span className="inline-block px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider bg-pnp-navy/5 text-pnp-navy border border-pnp-navy/10 rounded">
                           {ann.category}
                         </span>
                       </div>
 
-                      <h4 className="text-base font-bold text-pnp-navy leading-snug mb-2 group-hover:text-pnp-gold transition-colors duration-250">
+                      <h4 className="text-base font-bold text-pnp-navy leading-snug mb-2 group-hover:text-pnp-gold transition-colors duration-200">
                         {ann.title}
                       </h4>
 
-                      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
+                      <p className="text-gray-650 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
                         {ann.content}
                       </p>
                     </div>
 
                     {/* Metadata */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] sm:text-xs text-gray-405 pt-4 border-t border-gray-100 mt-auto">
-                      <span className="flex items-center gap-1 font-medium text-gray-500">
-                        <User className="w-3.5 h-3.5" />
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] sm:text-xs text-gray-500 pt-4 border-t border-gray-100 mt-auto">
+                      <span className="flex items-center gap-1 font-semibold text-gray-600">
+                        <User className="w-3.5 h-3.5 text-pnp-navy" />
                         {ann.author}
                       </span>
-                      <span className="flex items-center gap-1 text-gray-400">
-                        <Calendar className="w-3.5 h-3.5" />
+                      <span className="flex items-center gap-1 text-gray-500">
+                        <Calendar className="w-3.5 h-3.5 text-pnp-navy" />
                         {formatDate(ann.datePublished)}
                       </span>
                     </div>
@@ -104,27 +104,27 @@ export default function Announcements() {
               {mockSafetyAdvisories.map((advisory) => (
                 <div
                   key={advisory.id}
-                  className={`p-6 rounded-xl border transition-all duration-300 relative overflow-hidden ${
+                  className={`p-6 rounded-lg border transition-all duration-200 relative overflow-hidden ${
                     advisory.riskLevel === 'High'
-                      ? 'bg-red-50/70 border-red-200/80 text-red-900 shadow-sm shadow-red-500/5'
-                      : 'bg-amber-50/70 border-amber-200/80 text-amber-900 shadow-sm shadow-amber-500/5'
+                      ? 'bg-red-50 border-red-200 text-red-955'
+                      : 'bg-amber-50 border-amber-200 text-amber-955'
                   }`}
                 >
                   {/* Accent bar */}
                   <div
                     className={`absolute left-0 top-0 bottom-0 w-1 ${
-                      advisory.riskLevel === 'High' ? 'bg-red-600' : 'bg-amber-600'
+                      advisory.riskLevel === 'High' ? 'bg-[#DC2626]' : 'bg-[#D4A843]'
                     }`}
                   />
 
                   <div className="flex gap-4">
                     <div className="shrink-0 mt-0.5">
                       {advisory.riskLevel === 'High' ? (
-                        <div className="p-1.5 rounded-lg bg-red-100 text-red-700">
+                        <div className="p-1.5 rounded-lg bg-red-100 text-[#DC2626]">
                           <ShieldAlert className="w-5 h-5" />
                         </div>
                       ) : (
-                        <div className="p-1.5 rounded-lg bg-amber-100 text-amber-700">
+                        <div className="p-1.5 rounded-lg bg-amber-100 text-[#B8912E]">
                           <Info className="w-5 h-5" />
                         </div>
                       )}
@@ -132,14 +132,14 @@ export default function Announcements() {
 
                     <div className="flex-1">
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <h4 className="font-bold text-base tracking-tight leading-tight">
+                        <h4 className="font-bold text-base tracking-tight leading-tight text-pnp-navy">
                           {advisory.title}
                         </h4>
                         <span
-                          className={`px-2 py-0.5 text-[10px] font-extrabold uppercase rounded tracking-wider ${
+                          className={`px-2 py-0.5 text-[9px] font-extrabold uppercase rounded tracking-wider ${
                             advisory.riskLevel === 'High'
-                              ? 'bg-red-200 text-red-800'
-                              : 'bg-amber-200 text-amber-800'
+                              ? 'bg-red-200 text-red-900 border border-red-300'
+                              : 'bg-amber-200 text-amber-900 border border-amber-300'
                           }`}
                         >
                           {advisory.riskLevel} Risk
@@ -150,9 +150,9 @@ export default function Announcements() {
                         {advisory.description}
                       </p>
 
-                      <div className="flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-100/50">
+                      <div className="flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-200/50">
                         <span>Issued: {formatDate(advisory.dateIssued)}</span>
-                        <span className="font-medium text-pnp-navy">Active Alert Zone</span>
+                        <span className="font-bold text-pnp-navy">Active Alert Zone</span>
                       </div>
                     </div>
                   </div>
@@ -161,9 +161,9 @@ export default function Announcements() {
             </div>
 
             {/* Emergency Hotline Quick Box */}
-            <div className="mt-8 p-6 rounded-xl bg-pnp-navy text-white relative overflow-hidden shadow-lg shadow-pnp-navy/15">
+            <div className="mt-8 p-6 rounded-lg bg-pnp-navy text-white relative overflow-hidden border border-pnp-gold/20">
               <div
-                className="absolute inset-0 opacity-[0.03]"
+                className="absolute inset-0 opacity-[0.02]"
                 style={{
                   backgroundImage:
                     'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54 48c-2 0-3-1-4-2l-7-7c-1-1-1-3 0-4l3-3c-1-3-3-6-6-9l-9-9 3-3c1-1 3-1 4 0l7 7c1 1 2 2 2 4v4\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'2\'/%3E%3C/svg%3E")',
@@ -178,15 +178,15 @@ export default function Announcements() {
               <div className="space-y-2.5 font-mono text-sm">
                 <div className="flex items-center justify-between border-b border-white/10 pb-1.5">
                   <span className="text-gray-400 text-xs">Montalban Police:</span>
-                  <span className="font-semibold">(02) 8941-1122</span>
+                  <span className="font-semibold text-pnp-gold-light">(02) 8941-1122</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-white/10 pb-1.5">
                   <span className="text-gray-400 text-xs">Mobile Hotline:</span>
-                  <span className="font-semibold">0998-598-5612</span>
+                  <span className="font-semibold text-pnp-gold-light">0998-598-5612</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-xs">NDRRMO Rizal:</span>
-                  <span className="font-semibold">911 / 112</span>
+                  <span className="font-semibold text-pnp-gold-light">911 / 112</span>
                 </div>
               </div>
             </div>

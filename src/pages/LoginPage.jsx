@@ -71,7 +71,7 @@ const LoginPage = () => {
   const isLocked = lockoutSecs > 0;
 
   return (
-    <div className="min-h-screen bg-pnp-navy flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#070F2B] flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -87,37 +87,37 @@ const LoginPage = () => {
       <div className="w-full max-w-md relative z-10">
         {/* Logo / Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-pnp-gold/10 border-2 border-pnp-gold rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-pnp-gold/5 border border-pnp-gold rounded-full mb-4">
             <Shield className="w-10 h-10 text-pnp-gold" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">
             AGAPAY
           </h1>
-          <p className="text-pnp-gold text-sm font-medium mt-1">
+          <p className="text-pnp-gold text-sm font-bold mt-1 uppercase tracking-wide">
             Integrated Incident Reporting &amp; Monitoring System
           </p>
-          <p className="text-gray-400 text-xs mt-1">
+          <p className="text-gray-400 text-xs mt-1 font-semibold">
             Montalban Police Station &bull; Rodriguez, Rizal
           </p>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white rounded-lg border border-gray-200 shadow-xl overflow-hidden">
           {/* Authorized Personnel Banner */}
-          <div className={`px-6 py-3 flex items-center gap-2 justify-center border-b transition-colors duration-300 ${
-            isLocked ? 'bg-red-900 border-red-950 text-red-200' : 'bg-pnp-navy-dark border-pnp-navy-light text-pnp-gold'
+          <div className={`px-6 py-3 flex items-center gap-2 justify-center border-b transition-colors duration-250 ${
+            isLocked ? 'bg-[#DC2626] border-red-900 text-white' : 'bg-pnp-navy border-pnp-navy-dark text-pnp-gold'
           }`}>
             {isLocked ? (
               <>
-                <ShieldAlert className="w-4 h-4 text-red-400 animate-pulse" />
-                <span className="text-xs font-semibold uppercase tracking-wider">
+                <ShieldAlert className="w-4 h-4 text-white animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider">
                   System Lockout Active ({lockoutSecs}s)
                 </span>
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4 text-pnp-gold" />
-                <span className="text-xs font-semibold uppercase tracking-wider">
+                <span className="text-xs font-bold uppercase tracking-wider">
                   Authorized Personnel Only
                 </span>
               </>
@@ -158,10 +158,10 @@ const LoginPage = () => {
                     type="email"
                     disabled={isLocked}
                     autoComplete="email"
-                    className={`w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                    className={`w-full pl-10 pr-4 py-2.5 border rounded-md text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed bg-gray-50/50 focus:bg-white ${
                       errors.email
                         ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:ring-pnp-navy focus:border-pnp-navy'
+                        : 'border-gray-300 focus:ring-pnp-gold focus:border-pnp-gold'
                     }`}
                     placeholder="officer@agapay.gov.ph"
                     {...register('email', {
@@ -174,7 +174,7 @@ const LoginPage = () => {
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-1 text-xs text-red-650 font-semibold">
                     {errors.email.message}
                   </p>
                 )}
@@ -195,10 +195,10 @@ const LoginPage = () => {
                     type={showPassword ? 'text' : 'password'}
                     disabled={isLocked}
                     autoComplete="current-password"
-                    className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                    className={`w-full pl-10 pr-10 py-2.5 border rounded-md text-sm focus:outline-none focus:ring-2 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed bg-gray-50/50 focus:bg-white ${
                       errors.password
                         ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                        : 'border-gray-300 focus:ring-pnp-navy focus:border-pnp-navy'
+                        : 'border-gray-300 focus:ring-pnp-gold focus:border-pnp-gold'
                     }`}
                     placeholder="Enter your security access code"
                     {...register('password', {
@@ -213,7 +213,7 @@ const LoginPage = () => {
                     type="button"
                     disabled={isLocked}
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:cursor-not-allowed"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-650 transition-colors disabled:cursor-not-allowed outline-none focus-visible:ring-1 focus-visible:ring-pnp-gold rounded p-0.5 cursor-pointer"
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -223,7 +223,7 @@ const LoginPage = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-1 text-xs text-red-650 font-semibold">
                     {errors.password.message}
                   </p>
                 )}
@@ -233,7 +233,7 @@ const LoginPage = () => {
               <button
                 type="submit"
                 disabled={isLoading || isLocked}
-                className="w-full bg-pnp-navy hover:bg-pnp-blue text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-pnp-navy hover:bg-pnp-navy-light text-white font-bold py-2.5 px-4 rounded-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-pnp-navy focus-visible:ring-offset-2 outline-none cursor-pointer"
               >
                 {isLoading ? (
                   <>
@@ -242,7 +242,7 @@ const LoginPage = () => {
                   </>
                 ) : isLocked ? (
                   <>
-                    <Lock className="w-5 h-5 text-red-400" />
+                    <Lock className="w-5 h-5 text-red-200" />
                     Locked Out ({lockoutSecs}s)
                   </>
                 ) : (
@@ -260,7 +260,7 @@ const LoginPage = () => {
         <div className="text-center mt-6">
           <Link
             to="/"
-            className="text-sm text-gray-400 hover:text-pnp-gold transition-colors font-medium"
+            className="text-sm text-gray-400 hover:text-pnp-gold transition-colors font-semibold focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded p-0.5"
           >
             &larr; Return to Public Landing Page
           </Link>

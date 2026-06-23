@@ -91,8 +91,8 @@ const Sidebar = ({ isOpen, onClose }) => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-          <p className="px-3 text-[10px] font-semibold text-gray-500 uppercase tracking-widest mb-2">
+        <nav className="flex-1 py-4 space-y-1 overflow-y-auto">
+          <p className="px-5 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">
             Menu
           </p>
           {navItems.map((item) => (
@@ -102,23 +102,23 @@ const Sidebar = ({ isOpen, onClose }) => {
               end={item.end}
               onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 group ${
+                `flex items-center gap-3 pl-5 pr-4 py-3 text-sm font-medium transition-all duration-150 group border-l-4 ${
                   isActive
-                    ? 'bg-pnp-gold/15 text-pnp-gold'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    ? 'border-pnp-gold bg-white/5 text-white font-semibold'
+                    : 'border-transparent text-gray-400 hover:bg-white/5 hover:text-white'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
                   <item.icon
-                    className={`w-5 h-5 flex-shrink-0 ${
-                      isActive ? 'text-pnp-gold' : 'text-gray-400 group-hover:text-white'
+                    className={`w-4 h-4 flex-shrink-0 transition-colors ${
+                      isActive ? 'text-pnp-gold' : 'text-gray-500 group-hover:text-gray-300'
                     }`}
                   />
-                  <span className="flex-1">{item.label}</span>
+                  <span className="flex-1 tracking-wide">{item.label}</span>
                   {isActive && (
-                    <ChevronRight className="w-4 h-4 text-pnp-gold/60" />
+                    <ChevronRight className="w-3.5 h-3.5 text-pnp-gold/60" />
                   )}
                 </>
               )}
@@ -127,20 +127,20 @@ const Sidebar = ({ isOpen, onClose }) => {
         </nav>
 
         {/* User Info + Logout */}
-        <div className="px-3 pb-4 mt-auto">
+        <div className="px-4 pb-4 mt-auto">
           <div className="border-t border-white/10 pt-4">
             {/* User Info */}
-            <div className="flex items-center gap-3 px-3 mb-3">
-              <div className="w-9 h-9 bg-pnp-blue rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white text-sm font-bold">
+            <div className="flex items-center gap-3 px-1 mb-4">
+              <div className="w-9 h-9 bg-pnp-navy-dark border border-white/10 rounded flex items-center justify-center flex-shrink-0">
+                <span className="text-pnp-gold text-sm font-bold">
                   {user?.name?.charAt(0) || 'A'}
                 </span>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-white text-sm font-medium truncate">
+                <p className="text-white text-xs font-bold truncate tracking-wide">
                   {user?.name || 'Admin User'}
                 </p>
-                <p className="text-gray-400 text-xs truncate capitalize">
+                <p className="text-gray-500 text-[10px] font-semibold truncate capitalize mt-0.5">
                   {user?.role?.replace(/_/g, ' ') || 'Administrator'}
                 </p>
               </div>
@@ -149,9 +149,9 @@ const Sidebar = ({ isOpen, onClose }) => {
             {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all duration-150 w-full"
+              className="flex items-center justify-center gap-2 px-3 py-2 border border-white/10 rounded text-xs font-semibold text-gray-300 hover:bg-red-950/20 hover:text-red-400 hover:border-red-500/30 transition-all duration-150 w-full"
             >
-              <LogOut className="w-5 h-5" />
+              <LogOut className="w-4 h-4" />
               <span>Sign Out</span>
             </button>
           </div>

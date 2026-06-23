@@ -63,14 +63,14 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="px-3 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200"
+                className="px-3 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2 outline-none cursor-pointer"
               >
                 {link.label}
               </a>
             ))}
             <Link
               to="/login"
-              className="ml-3 inline-flex items-center px-5 py-2 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-semibold rounded-md transition-colors duration-200"
+              className="ml-3 inline-flex items-center px-5 py-2 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-bold rounded-md transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2 outline-none cursor-pointer"
             >
               Login
             </Link>
@@ -79,7 +79,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="lg:hidden p-2 text-gray-200 hover:text-white focus:outline-none"
+            className="lg:hidden p-2 text-gray-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2 rounded cursor-pointer"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle navigation menu"
           >
@@ -100,7 +100,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-3 py-2.5 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+              className="block px-3 py-2.5 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-pnp-gold outline-none cursor-pointer"
             >
               {link.label}
             </a>
@@ -108,7 +108,7 @@ export default function Navbar() {
           <Link
             to="/login"
             onClick={() => setMobileOpen(false)}
-            className="block mt-2 text-center px-5 py-2.5 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-semibold rounded-md transition-colors"
+            className="block mt-2 text-center px-5 py-2.5 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-bold rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-pnp-gold outline-none cursor-pointer"
           >
             Login
           </Link>

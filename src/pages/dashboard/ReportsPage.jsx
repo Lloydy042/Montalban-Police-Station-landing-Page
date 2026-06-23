@@ -22,30 +22,30 @@ export default function ReportsPage() {
   const getStatusClass = (status) => {
     switch (status) {
       case 'Pending':
-        return 'bg-amber-100 text-amber-800';
+        return 'bg-amber-50 text-amber-800 border border-amber-250/70';
       case 'Assigned':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-50 text-blue-800 border border-blue-250/70';
       case 'In Progress':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-orange-50 text-orange-850 border border-orange-250/70';
       case 'Resolved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-50 text-emerald-800 border border-emerald-250/70';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
   const getSeverityClass = (severity) => {
     switch (severity) {
       case 'Low':
-        return 'bg-gray-100 text-gray-850';
+        return 'bg-slate-50 text-slate-700 border border-slate-200';
       case 'Medium':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-50 text-yellow-800 border border-yellow-250/70';
       case 'High':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-orange-50 text-orange-800 border border-orange-250/70';
       case 'Critical':
-        return 'bg-red-105 text-red-800';
+        return 'bg-red-50 text-red-800 border border-red-250/70';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
@@ -103,12 +103,12 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       {/* Header card */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white p-6 rounded border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-pnp-navy">
+          <h2 className="text-lg font-bold text-pnp-navy tracking-tight">
             Incident Database
           </h2>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <p className="text-xs text-gray-500 mt-0.5">
             Search, filter, and review incident reports submitted by citizens of Rodriguez, Rizal.
           </p>
         </div>
@@ -116,7 +116,7 @@ export default function ReportsPage() {
           {hasActiveFilters && (
             <button
               onClick={resetFilters}
-              className="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-semibold rounded-lg transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-semibold rounded transition-colors shadow-sm"
             >
               <X className="w-3.5 h-3.5" />
               Reset Filters
@@ -126,7 +126,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Filter panel */}
-      <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <div className="bg-white p-5 rounded border border-gray-200 shadow-sm space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Search Input */}
           <div className="md:col-span-1 relative">
@@ -136,7 +136,7 @@ export default function ReportsPage() {
               placeholder="Search ID, desc, barangay..."
               value={filters.search}
               onChange={handleSearchChange}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy transition-all"
             />
           </div>
 
@@ -145,7 +145,7 @@ export default function ReportsPage() {
             <select
               value={filters.status}
               onChange={(e) => handleSelectFilter('status', e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all text-gray-750"
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy transition-all text-gray-700"
             >
               <option value="All">All Statuses</option>
               <option value="Pending">Pending</option>
@@ -160,7 +160,7 @@ export default function ReportsPage() {
             <select
               value={filters.type}
               onChange={(e) => handleSelectFilter('type', e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all text-gray-750"
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy transition-all text-gray-700"
             >
               <option value="All">All Incident Types</option>
               {incidentTypes.map((t) => (
@@ -176,7 +176,7 @@ export default function ReportsPage() {
             <select
               value={filters.severity}
               onChange={(e) => handleSelectFilter('severity', e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all text-gray-750"
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy transition-all text-gray-700"
             >
               <option value="All">All Severities</option>
               <option value="Low">Low</option>
@@ -191,7 +191,7 @@ export default function ReportsPage() {
             <select
               value={filters.verification || 'All'}
               onChange={(e) => handleSelectFilter('verification', e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy transition-all text-gray-750"
+              className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy transition-all text-gray-700"
             >
               <option value="All">All Verifications</option>
               <option value="unverified">Unverified</option>
@@ -203,8 +203,8 @@ export default function ReportsPage() {
       </div>
 
       {/* Reports Table Card */}
-      <div className="bg-white rounded-2xl border border-gray-250/70 shadow-sm overflow-hidden">
-        <div className="px-5 py-4 border-b border-gray-150 flex items-center justify-between bg-gray-50/50">
+      <div className="bg-white rounded border border-gray-200 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 border-b border-gray-200 flex items-center justify-between bg-gray-50/50">
           <span className="text-xs font-bold text-pnp-navy uppercase tracking-wider">
             Reports Listing ({filteredReports.length})
           </span>
@@ -222,7 +222,7 @@ export default function ReportsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-50 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200">
+                <tr className="bg-gray-50 text-[10px] font-bold text-gray-505 uppercase tracking-widest border-b border-gray-200 select-none">
                   <th className="px-6 py-3.5">Report ID</th>
                   <th className="px-6 py-3.5">Incident Type</th>
                   <th className="px-6 py-3.5">Barangay</th>
@@ -234,24 +234,24 @@ export default function ReportsPage() {
                   <th className="px-6 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-sm">
+              <tbody className="divide-y divide-gray-150 text-xs">
                 {filteredReports.map((report) => (
                   <tr
                     key={report.id}
                     className="hover:bg-gray-50/50 transition-colors"
                   >
-                    <td className="px-6 py-4 font-mono font-bold text-xs text-gray-600">
+                    <td className="px-6 py-4 font-mono font-bold text-xs text-slate-500">
                       {report.id}
                     </td>
-                    <td className="px-6 py-4 font-medium text-gray-900">
+                    <td className="px-6 py-4 font-semibold text-gray-900">
                       {report.type}
                     </td>
-                    <td className="px-6 py-4 text-gray-500">
+                    <td className="px-6 py-4 text-gray-600">
                       {report.barangay}
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getSeverityClass(
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getSeverityClass(
                           report.severity
                         )}`}
                       >
@@ -260,7 +260,7 @@ export default function ReportsPage() {
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getStatusClass(
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getStatusClass(
                           report.status
                         )}`}
                       >
@@ -269,7 +269,7 @@ export default function ReportsPage() {
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationClass(
+                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getVerificationClass(
                           report.verificationStatus
                         )}`}
                       >
@@ -277,18 +277,18 @@ export default function ReportsPage() {
                         {getVerificationLabel(report.verificationStatus)}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">
+                    <td className="px-6 py-4 text-gray-700 font-semibold">
                       {report.assignedOfficer || (
                         <span className="text-gray-400 text-xs italic">Unassigned</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-xs text-gray-400">
+                    <td className="px-6 py-4 text-slate-400">
                       {formatDate(report.dateSubmitted)}
                     </td>
                     <td className="px-6 py-4 text-right">
                       <Link
                         to={`/dashboard/reports/${report.id}`}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-semibold rounded transition-colors"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-semibold rounded border border-pnp-navy transition-colors shadow-sm"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         Review

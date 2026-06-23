@@ -151,25 +151,25 @@ export default function AnnouncementsPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Title Header Card */}
-      <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
+      <div className="bg-white p-6 rounded border border-gray-200 shadow-sm flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-pnp-navy">Station Bulletin Feed</h2>
+          <h2 className="text-lg font-bold text-pnp-navy tracking-tight">Station Bulletin Feed</h2>
           <p className="text-xs text-gray-500 mt-0.5">Manage announcements and safety events with social-feed mechanics.</p>
         </div>
-        <div className="w-10 h-10 bg-pnp-navy/5 rounded-full flex items-center justify-center border border-pnp-navy/10">
-          <Megaphone className="w-5 h-5 text-pnp-navy" />
+        <div className="w-10 h-10 bg-pnp-navy/5 rounded border border-pnp-navy/10 flex items-center justify-center">
+          <Megaphone className="w-4 h-4 text-pnp-navy" />
         </div>
       </div>
 
       {/* Facebook-style "Create Post" Card */}
-      <div className="bg-white p-4 rounded-2xl border border-gray-250/70 shadow-sm space-y-3.5">
+      <div className="bg-white p-4 rounded border border-gray-200 shadow-sm space-y-3.5">
         <div className="flex gap-3">
-          <div className="w-10 h-10 bg-pnp-navy rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-sm border border-pnp-navy/10">
+          <div className="w-9 h-9 bg-pnp-navy rounded flex items-center justify-center text-white font-bold shrink-0 border border-pnp-navy/10">
             {currentUser?.name?.charAt(0) || 'A'}
           </div>
           <button
             onClick={openCreateModal}
-            className="flex-1 bg-gray-100 hover:bg-gray-150 text-gray-500 rounded-full px-5 text-left text-sm transition-colors focus:outline-none border border-gray-200/50"
+            className="flex-1 bg-gray-50 hover:bg-gray-100 text-gray-500 rounded px-4 text-left text-xs transition-colors focus:outline-none border border-gray-200"
           >
             What announcement or event do you want to share, {currentUser?.name?.split(' ')[1] || 'Admin'}?
           </button>
@@ -177,14 +177,14 @@ export default function AnnouncementsPage() {
         <div className="border-t border-gray-100 pt-3 flex justify-between items-center text-xs text-gray-600 font-semibold px-2">
           <button 
             onClick={openCreateModal}
-            className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg transition-colors flex-1 justify-center"
+            className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded transition-colors flex-1 justify-center border border-transparent hover:border-gray-200"
           >
-            <ImageIcon className="w-4 h-4 text-green-500" />
+            <ImageIcon className="w-4 h-4 text-emerald-600" />
             Photo/Image
           </button>
           <button 
             onClick={openCreateModal}
-            className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg transition-colors flex-1 justify-center"
+            className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded transition-colors flex-1 justify-center border border-transparent hover:border-gray-200"
           >
             <Plus className="w-4 h-4 text-pnp-gold" />
             New Event Advisory
@@ -198,12 +198,12 @@ export default function AnnouncementsPage() {
           <div
             key={ann.id}
             onClick={() => setActiveAnnouncement(ann)}
-            className="bg-white rounded-2xl border border-gray-250/70 shadow-sm overflow-hidden hover:shadow transition-shadow cursor-pointer flex flex-col group"
+            className="bg-white rounded border border-gray-200 shadow-sm overflow-hidden hover:shadow transition-shadow cursor-pointer flex flex-col group"
           >
             {/* Header info */}
             <div className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-pnp-navy rounded-full flex items-center justify-center text-white font-bold shrink-0 border border-pnp-navy/10 shadow-sm">
+                <div className="w-9 h-9 bg-pnp-navy rounded flex items-center justify-center text-white font-bold shrink-0 border border-pnp-navy/10 shadow-sm">
                   {ann.author.charAt(0)}
                 </div>
                 <div>
@@ -211,7 +211,7 @@ export default function AnnouncementsPage() {
                     <span className="font-bold text-sm text-gray-900 leading-tight">
                       {ann.author}
                     </span>
-                    <span className="inline-block px-2 py-0.5 bg-pnp-navy/5 text-pnp-navy text-[9px] font-extrabold uppercase rounded">
+                    <span className="inline-block px-1.5 py-0.5 bg-pnp-navy/5 text-pnp-navy text-[9px] font-extrabold uppercase rounded border border-pnp-navy/20">
                       {ann.category}
                     </span>
                   </div>
@@ -231,27 +231,27 @@ export default function AnnouncementsPage() {
               <div className="flex items-center gap-1">
                 <button
                   onClick={(e) => handleEdit(ann, e)}
-                  className="p-2 hover:bg-gray-100 rounded-full text-gray-500 hover:text-pnp-navy transition-colors"
+                  className="p-2 hover:bg-gray-100 rounded text-gray-500 hover:text-pnp-navy transition-colors border border-transparent hover:border-gray-200"
                   title="Edit post"
                 >
-                  <Edit className="w-4 h-4" />
+                  <Edit className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={(e) => handleDelete(ann.id, e)}
-                  className="p-2 hover:bg-red-50 rounded-full text-gray-400 hover:text-red-650 transition-colors"
+                  className="p-2 hover:bg-red-55 rounded text-gray-405 hover:text-red-600 transition-colors border border-transparent hover:border-red-200"
                   title="Delete post"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
             {/* Post Content */}
             <div className="px-4 pb-3 space-y-2">
-              <h3 className="font-extrabold text-gray-950 text-base leading-snug">
+              <h3 className="font-extrabold text-gray-900 text-sm leading-snug tracking-tight">
                 {ann.title}
               </h3>
-              <p className="text-gray-650 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap line-clamp-4">
+              <p className="text-gray-600 text-xs leading-relaxed whitespace-pre-wrap line-clamp-4">
                 {ann.content}
               </p>
             </div>
@@ -262,7 +262,7 @@ export default function AnnouncementsPage() {
                 <img
                   src={ann.image}
                   alt={ann.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>
             )}
@@ -271,13 +271,13 @@ export default function AnnouncementsPage() {
             <div className="px-4 py-2 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-semibold select-none">
               <button 
                 onClick={(e) => handleTogglePublish(ann.id, e)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded border transition-colors ${
                   ann.is_published 
-                    ? 'text-green-600 hover:bg-green-50' 
-                    : 'text-gray-400 hover:bg-gray-200'
+                    ? 'text-emerald-700 border-emerald-200 bg-emerald-50 hover:bg-emerald-100' 
+                    : 'text-gray-400 border-gray-200 bg-white hover:bg-gray-100'
                 }`}
               >
-                <Check className="w-4 h-4" />
+                <Check className="w-3.5 h-3.5" />
                 {ann.is_published ? 'Published' : 'Draft / Private'}
               </button>
               <div className="text-[10px] text-gray-400 font-mono font-medium">
@@ -291,34 +291,34 @@ export default function AnnouncementsPage() {
       {/* Create/Edit Social Post Modal */}
       {showPostModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-200 animate-scale-in">
+          <div className="bg-white rounded shadow-2xl max-w-lg w-full overflow-hidden border border-gray-250 animate-scale-in">
             {/* Header */}
-            <div className="p-4 border-b border-gray-150 flex items-center justify-between bg-gray-50">
-              <h3 className="font-bold text-pnp-navy flex items-center gap-2">
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+              <h3 className="font-bold text-xs uppercase tracking-wider text-pnp-navy flex items-center gap-2">
                 <Megaphone className="w-4 h-4 text-pnp-gold" />
                 {isEditing ? 'Edit Station Post' : 'Create Station Post'}
               </h3>
               <button
                 onClick={() => setShowPostModal(false)}
-                className="p-1.5 hover:bg-gray-200 rounded-full text-gray-400 hover:text-gray-700 transition-colors"
+                className="p-1.5 hover:bg-gray-200 rounded-full text-gray-450 hover:text-gray-700 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div className="flex gap-3">
-                <div className="w-10 h-10 bg-pnp-navy rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-sm border border-pnp-navy/10">
+                <div className="w-9 h-9 bg-pnp-navy rounded flex items-center justify-center text-white font-bold shrink-0 border border-pnp-navy/10">
                   {currentUser?.name?.charAt(0) || 'A'}
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-gray-900">{form.author}</h4>
+                  <h4 className="font-bold text-xs text-gray-900">{form.author}</h4>
                   <div className="flex gap-2 mt-1">
                     <select
                       value={form.category}
                       onChange={(e) => setForm({ ...form, category: e.target.value })}
-                      className="px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-600 focus:outline-none"
+                      className="px-2 py-0.5 bg-gray-150 border border-gray-250 rounded text-[9px] font-bold text-gray-600 focus:outline-none"
                     >
                       <option value="Announcement">Announcement</option>
                       <option value="Advisory">Advisory</option>
@@ -327,7 +327,7 @@ export default function AnnouncementsPage() {
                       <option value="Internal">Internal</option>
                     </select>
 
-                    <label className="flex items-center gap-1.5 px-2 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] font-bold text-gray-600 cursor-pointer select-none">
+                    <label className="flex items-center gap-1.5 px-2 py-0.5 bg-gray-150 border border-gray-250 rounded text-[9px] font-bold text-gray-650 cursor-pointer select-none">
                       <input
                         type="checkbox"
                         checked={form.is_published}
@@ -348,7 +348,7 @@ export default function AnnouncementsPage() {
                   value={form.title}
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                   placeholder="Post Title (e.g. Weather Advisory / Anti-Drug Campaign)"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy bg-gray-50"
+                  className="w-full px-4 py-2 border border-gray-300 rounded text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy bg-gray-50"
                 />
               </div>
 
@@ -360,13 +360,13 @@ export default function AnnouncementsPage() {
                   onChange={(e) => setForm({ ...form, content: e.target.value })}
                   placeholder="What announcements or events do you want to publish to the community?"
                   rows={5}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy bg-gray-50 resize-none"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy bg-gray-50 resize-none"
                 />
               </div>
 
               {/* Image upload preview widget */}
               {form.image ? (
-                <div className="relative rounded-xl border border-gray-200 overflow-hidden bg-gray-50 max-h-48 flex items-center justify-center">
+                <div className="relative rounded border border-gray-200 overflow-hidden bg-gray-50 max-h-48 flex items-center justify-center">
                   <img
                     src={form.image}
                     alt="Upload preview"
@@ -385,11 +385,11 @@ export default function AnnouncementsPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full border-2 border-dashed border-gray-300 hover:border-pnp-navy rounded-xl py-6 flex flex-col items-center justify-center text-gray-500 hover:text-pnp-navy transition-all bg-gray-50/50"
+                    className="w-full border-2 border-dashed border-gray-300 hover:border-pnp-navy rounded py-6 flex flex-col items-center justify-center text-gray-500 hover:text-pnp-navy transition-all bg-gray-50/50"
                   >
-                    <ImageIcon className="w-8 h-8 mb-2 text-gray-400" />
-                    <span className="text-xs font-bold uppercase tracking-wider">Add Photo Cover</span>
-                    <span className="text-[10px] text-gray-450 mt-1">JPEG, PNG formats accepted</span>
+                    <ImageIcon className="w-6 h-6 mb-2 text-gray-400" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Add Photo Cover</span>
+                    <span className="text-[9px] text-gray-450 mt-1">JPEG, PNG formats accepted</span>
                   </button>
                 </div>
               )}
@@ -406,7 +406,7 @@ export default function AnnouncementsPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center bg-pnp-navy hover:bg-pnp-navy-light text-white font-bold py-2.5 px-4 rounded-lg transition-colors shadow-sm text-sm"
+                  className="w-full inline-flex items-center justify-center bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded transition-colors shadow-sm text-xs"
                 >
                   {isEditing ? 'Update Post' : 'Post Announcement'}
                 </button>

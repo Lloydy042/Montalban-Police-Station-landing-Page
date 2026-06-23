@@ -39,16 +39,16 @@ export default function Contact() {
         <div className="grid lg:grid-cols-12 gap-10">
           {/* Contact Details Column */}
           <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
-            <div className="bg-pnp-navy text-white p-8 rounded-2xl shadow-lg relative overflow-hidden flex-1">
+            <div className="bg-pnp-navy text-white p-8 rounded-lg border border-pnp-gold/20 relative overflow-hidden flex-1">
               <div
-                className="absolute inset-0 opacity-[0.03]"
+                className="absolute inset-0 opacity-[0.02]"
                 style={{
                   backgroundImage:
                     'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54 48c-2 0-3-1-4-2l-7-7c-1-1-1-3 0-4l3-3c-1-3-3-6-6-9l-9-9 3-3c1-1 3-1 4 0l7 7c1 1 2 2 2 4v4\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'2\'/%3E%3C/svg%3E")',
                 }}
               />
-              <h3 className="text-xl font-bold text-pnp-gold mb-6 tracking-wide">
-                STATION INFORMATION
+              <h3 className="text-xl font-bold text-pnp-gold mb-6 tracking-wide uppercase">
+                Station Information
               </h3>
 
               <div className="space-y-6">
@@ -60,7 +60,7 @@ export default function Contact() {
                     <h4 className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">
                       Office Address
                     </h4>
-                    <p className="text-sm text-gray-250 leading-relaxed">
+                    <p className="text-sm text-gray-350 leading-relaxed">
                       J. P. Rizal St, Rodriguez (Montalban), Rizal, 1860, Philippines
                     </p>
                   </div>
@@ -74,7 +74,7 @@ export default function Contact() {
                     <h4 className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">
                       Telephone / Mobile
                     </h4>
-                    <p className="text-sm font-mono text-gray-250 leading-relaxed">
+                    <p className="text-sm font-mono text-gray-350 leading-relaxed">
                       Landline: (02) 8941-1122 <br />
                       Mobile: +63 998-598-5612 / 0917-889-1234
                     </p>
@@ -89,7 +89,7 @@ export default function Contact() {
                     <h4 className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">
                       Email Address
                     </h4>
-                    <p className="text-sm font-mono text-gray-250 leading-relaxed">
+                    <p className="text-sm font-mono text-gray-350 leading-relaxed">
                       montalban.pnp@yahoo.com <br />
                       support.agapay@rodriguezrizal.gov.ph
                     </p>
@@ -104,7 +104,7 @@ export default function Contact() {
                     <h4 className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">
                       Operating Hours
                     </h4>
-                    <p className="text-sm text-gray-250 leading-relaxed">
+                    <p className="text-sm text-gray-350 leading-relaxed">
                       Public Desk & Administration: 8:00 AM – 5:00 PM <br />
                       Emergency Patrol & Incident Desk: 24 Hours / 7 Days
                     </p>
@@ -114,7 +114,7 @@ export default function Contact() {
             </div>
 
             {/* Google Map Mock/Embed Box */}
-            <div className="h-60 w-full rounded-2xl border border-gray-200 overflow-hidden shadow-sm relative bg-gray-250">
+            <div className="h-60 w-full rounded-lg border border-gray-200 overflow-hidden shadow-sm relative bg-gray-100">
               {/* Fallback mock map graphic using Tailwind */}
               <div className="absolute inset-0 bg-blue-50 flex flex-col items-center justify-center p-4 text-center">
                 <MapPin className="w-10 h-10 text-pnp-navy mb-2 animate-bounce" />
@@ -132,7 +132,7 @@ export default function Contact() {
                   href="https://maps.google.com/?q=Montalban+Police+Station+Rodriguez+Rizal" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="mt-3 px-4 py-1.5 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-semibold rounded-md transition-colors shadow-sm"
+                  className="mt-3 px-4 py-1.5 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-bold rounded-md transition-colors shadow-sm focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2 outline-none cursor-pointer"
                 >
                   View on Google Maps
                 </a>
@@ -141,7 +141,7 @@ export default function Contact() {
           </div>
 
           {/* Form Column */}
-          <div className="lg:col-span-7 bg-white p-8 rounded-2xl border border-gray-200 shadow-sm relative">
+          <div className="lg:col-span-7 bg-white p-8 rounded-lg border border-gray-200 shadow-sm relative">
             <h3 className="text-xl font-bold text-pnp-navy mb-6 pb-2 border-b border-gray-100 flex items-center gap-2">
               <span className="w-1.5 h-6 bg-pnp-navy rounded-sm" />
               General Inquiry Form
@@ -161,7 +161,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-pnp-navy mb-2">
+                    <label htmlFor="name" className="block text-xs font-extrabold uppercase tracking-wider text-pnp-navy mb-2">
                       Full Name
                     </label>
                     <input
@@ -172,12 +172,12 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Juan Dela Cruz"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-sm transition-all bg-gray-50/50"
+                      className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-gold focus:border-pnp-gold text-sm transition-all bg-gray-50/50 focus:bg-white"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-pnp-navy mb-2">
+                    <label htmlFor="email" className="block text-xs font-extrabold uppercase tracking-wider text-pnp-navy mb-2">
                       Email Address
                     </label>
                     <input
@@ -188,14 +188,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="e.g. juan@gmail.com"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-sm transition-all bg-gray-50/50"
+                      className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-gold focus:border-pnp-gold text-sm transition-all bg-gray-50/50 focus:bg-white"
                     />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-pnp-navy mb-2">
+                    <label htmlFor="phone" className="block text-xs font-extrabold uppercase tracking-wider text-pnp-navy mb-2">
                       Phone Number (Optional)
                     </label>
                     <input
@@ -205,12 +205,12 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="e.g. 09171234567"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-sm transition-all bg-gray-50/50"
+                      className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-gold focus:border-pnp-gold text-sm transition-all bg-gray-50/50 focus:bg-white"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-pnp-navy mb-2">
+                    <label htmlFor="subject" className="block text-xs font-extrabold uppercase tracking-wider text-pnp-navy mb-2">
                       Subject
                     </label>
                     <input
@@ -221,13 +221,13 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="e.g. Clearance Inquiry"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-sm transition-all bg-gray-50/50"
+                      className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-gold focus:border-pnp-gold text-sm transition-all bg-gray-50/50 focus:bg-white"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-pnp-navy mb-2">
+                  <label htmlFor="message" className="block text-xs font-extrabold uppercase tracking-wider text-pnp-navy mb-2">
                     Your Message
                   </label>
                   <textarea
@@ -238,14 +238,14 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Type your message or inquiry here..."
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-sm transition-all bg-gray-50/50 resize-none"
+                    className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pnp-gold focus:border-pnp-gold text-sm transition-all bg-gray-50/50 resize-none focus:bg-white"
                   />
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-sm hover:shadow text-sm"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-bold py-3 px-6 rounded-md transition-colors shadow-sm hover:shadow text-sm focus-visible:ring-2 focus-visible:ring-pnp-navy focus-visible:ring-offset-2 outline-none cursor-pointer"
                   >
                     Send Message
                     <Send className="w-4 h-4" />

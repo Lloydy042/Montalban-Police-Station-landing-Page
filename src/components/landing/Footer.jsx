@@ -41,7 +41,7 @@ export default function Footer() {
                 <a
                   href="#home"
                   onClick={(e) => handleScrollTo(e, '#home')}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   Home / Top
                 </a>
@@ -50,7 +50,7 @@ export default function Footer() {
                 <a
                   href="#about"
                   onClick={(e) => handleScrollTo(e, '#about')}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   About AGAPAY
                 </a>
@@ -59,7 +59,7 @@ export default function Footer() {
                 <a
                   href="#how-it-works"
                   onClick={(e) => handleScrollTo(e, '#how-it-works')}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   How It Works
                 </a>
@@ -68,7 +68,7 @@ export default function Footer() {
                 <a
                   href="#announcements"
                   onClick={(e) => handleScrollTo(e, '#announcements')}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   Announcements
                 </a>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <a
                   href="#contact"
                   onClick={(e) => handleScrollTo(e, '#contact')}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   Contact & Location
                 </a>
@@ -96,7 +96,7 @@ export default function Footer() {
                   href="https://www.pnp.gov.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors inline-flex items-center gap-1.5"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   PNP Portal <ExternalLink className="w-3 h-3 text-gray-500" />
                 </a>
@@ -106,7 +106,7 @@ export default function Footer() {
                   href="https://pnpclearance.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors inline-flex items-center gap-1.5"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   PNP Clearance <ExternalLink className="w-3 h-3 text-gray-500" />
                 </a>
@@ -116,7 +116,7 @@ export default function Footer() {
                   href="https://www.gov.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors inline-flex items-center gap-1.5"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   GOV.PH Portal <ExternalLink className="w-3 h-3 text-gray-500" />
                 </a>
@@ -126,7 +126,7 @@ export default function Footer() {
                   href="http://rodriguezrizal.gov.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors inline-flex items-center gap-1.5"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 focus-visible:ring-1 focus-visible:ring-pnp-gold outline-none rounded"
                 >
                   Rodriguez LGU <ExternalLink className="w-3 h-3 text-gray-500" />
                 </a>
@@ -139,7 +139,7 @@ export default function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-widest text-pnp-gold-light">
               Privacy & Compliance
             </h4>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-xs leading-relaxed space-y-2.5">
+            <div className="p-4 rounded-lg bg-white/5 border border-white/10 text-gray-400 text-xs leading-relaxed space-y-2.5">
               <span className="block text-pnp-gold font-bold text-[10px] uppercase tracking-wider">
                 Republic Act No. 10173
               </span>

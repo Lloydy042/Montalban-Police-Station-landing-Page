@@ -61,30 +61,30 @@ export default function DashboardHome() {
   const getStatusClass = (status) => {
     switch (status) {
       case 'Pending':
-        return 'bg-amber-100 text-amber-800';
+        return 'bg-amber-50 text-amber-800 border border-amber-250/70';
       case 'Assigned':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-50 text-blue-800 border border-blue-250/70';
       case 'In Progress':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-orange-50 text-orange-800 border border-orange-250/70';
       case 'Resolved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-50 text-emerald-800 border border-emerald-250/70';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
   const getSeverityClass = (severity) => {
     switch (severity) {
       case 'Low':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-slate-50 text-slate-700 border border-slate-200';
       case 'Medium':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-50 text-yellow-800 border border-yellow-250/70';
       case 'High':
-        return 'bg-orange-150 text-orange-800';
+        return 'bg-orange-50 text-orange-800 border border-orange-250/70';
       case 'Critical':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-50 text-red-800 border border-red-250/70';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
@@ -134,26 +134,26 @@ export default function DashboardHome() {
   return (
     <div className="space-y-6">
       {/* Welcome Message */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded border border-gray-200 shadow-sm">
         <div>
-          <h2 className="text-xl font-bold text-pnp-navy">
+          <h2 className="text-lg font-bold text-pnp-navy tracking-tight">
             Welcome back, Officer!
           </h2>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <p className="text-xs text-gray-500 mt-0.5">
             Here is what's happening in Rodriguez (Montalban), Rizal today.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2">
           <Link
             to="/dashboard/reports"
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-semibold rounded-lg transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-pnp-navy hover:bg-pnp-navy-light text-white text-xs font-semibold rounded transition-colors shadow-sm"
           >
             <Plus className="w-3.5 h-3.5" />
             New Report
           </Link>
           <Link
             to="/dashboard/announcements"
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-xs font-semibold rounded-lg transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-xs font-semibold rounded transition-colors shadow-sm"
           >
             <Megaphone className="w-3.5 h-3.5" />
             Post Update
@@ -164,69 +164,69 @@ export default function DashboardHome() {
       {/* Stats Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-250/70 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-pnp-navy/5 text-pnp-navy flex items-center justify-center shrink-0">
-            <FileText className="w-6 h-6" />
+        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded bg-pnp-navy/5 text-pnp-navy flex items-center justify-center shrink-0 border border-pnp-navy/5">
+            <FileText className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
               Total Reports
             </p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{total}</p>
+            <p className="text-xl font-bold text-gray-900 mt-0.5">{total}</p>
           </div>
         </div>
 
         {/* Pending */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-250/70 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-            <Clock className="w-6 h-6" />
+        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
+            <Clock className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
               Pending
             </p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{pending}</p>
+            <p className="text-xl font-bold text-gray-900 mt-0.5">{pending}</p>
           </div>
         </div>
 
         {/* In Progress */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-250/70 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
-            <TrendingUp className="w-6 h-6" />
+        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 border border-orange-100">
+            <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
               In Progress
             </p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+            <p className="text-xl font-bold text-gray-900 mt-0.5">
               {inProgress + assigned}
             </p>
           </div>
         </div>
 
         {/* Resolved */}
-        <div className="bg-white p-5 rounded-2xl border border-gray-250/70 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center shrink-0">
-            <CheckCircle2 className="w-6 h-6" />
+        <div className="bg-white p-5 rounded border border-gray-200 shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+            <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
               Resolved
             </p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{resolved}</p>
+            <p className="text-xl font-bold text-gray-900 mt-0.5">{resolved}</p>
           </div>
         </div>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Incident Map Box */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-250/70 shadow-sm overflow-hidden flex flex-col h-[480px]">
-          <div className="p-5 border-b border-gray-150 flex items-center justify-between">
-            <h3 className="font-bold text-pnp-navy flex items-center gap-2">
+        <div className="lg:col-span-2 bg-white rounded border border-gray-200 shadow-sm overflow-hidden flex flex-col h-[480px]">
+          <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-gray-50/50">
+            <h3 className="font-bold text-xs text-pnp-navy flex items-center gap-2 uppercase tracking-wider">
               <MapPin className="w-4 h-4 text-pnp-gold" />
               Incident Map Pinned Locations
             </h3>
-            <span className="px-2 py-0.5 bg-pnp-navy/5 text-pnp-navy text-[10px] font-bold rounded">
+            <span className="px-2 py-0.5 bg-pnp-navy border border-pnp-navy text-white text-[9px] font-bold rounded">
               {activeReportsCount} Active Incidents
             </span>
           </div>
@@ -286,37 +286,38 @@ export default function DashboardHome() {
         </div>
 
         {/* Quick Stats / Recharts Column */}
-        <div className="bg-white rounded-2xl border border-gray-250/70 shadow-sm p-5 flex flex-col h-[480px]">
-          <h3 className="font-bold text-pnp-navy mb-4">Monthly Report Trends</h3>
+        <div className="bg-white rounded border border-gray-200 shadow-sm p-5 flex flex-col h-[480px]">
+          <h3 className="font-bold text-xs text-pnp-navy uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">Monthly Report Trends</h3>
           <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={monthlyReportData}
-                margin={{ top: 10, right: 10, left: -20, bottom: 5 }}
+                margin={{ top: 10, right: 10, left: -25, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="month" tickLine={false} style={{ fontSize: 11 }} />
-                <YAxis tickLine={false} style={{ fontSize: 11 }} />
+                <XAxis dataKey="month" tickLine={false} style={{ fontSize: 10, fill: '#64748B' }} />
+                <YAxis tickLine={false} style={{ fontSize: 10, fill: '#64748B' }} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#0D1B4C',
                     color: '#fff',
-                    borderRadius: '8px',
-                    fontSize: '12px',
+                    border: 'none',
+                    borderRadius: '4px',
+                    fontSize: '11px',
                   }}
                 />
-                <Bar dataKey="reports" fill="#D4A843" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="reports" fill="#D4A843" radius={0} />
               </BarChart>
             </ResponsiveContainer>
           </div>
           {/* Quick Info Box */}
-          <div className="mt-4 p-4 rounded-xl bg-gray-50 border border-gray-150 flex items-start gap-3">
+          <div className="mt-4 p-4 rounded bg-gray-50 border border-gray-200 flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-pnp-gold shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-pnp-navy uppercase tracking-wider">
+              <h4 className="text-[10px] font-bold text-pnp-navy uppercase tracking-wider">
                 System Advisory
               </h4>
-              <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+              <p className="text-[10px] text-gray-500 mt-1 leading-relaxed">
                 Rainy season is causing a 15% increase in road incidents and flood complaints in low-lying areas. Keep patrol officers alerted.
               </p>
             </div>
@@ -325,12 +326,12 @@ export default function DashboardHome() {
       </div>
 
       {/* Recent Incident Reports Table */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-gray-150 flex items-center justify-between">
-          <h3 className="font-bold text-pnp-navy">Recent Reports</h3>
+      <div className="bg-white rounded border border-gray-200 shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-gray-50/50">
+          <h3 className="font-bold text-xs text-pnp-navy uppercase tracking-wider">Recent Reports</h3>
           <Link
             to="/dashboard/reports"
-            className="text-xs font-bold text-pnp-navy hover:text-pnp-gold transition-colors"
+            className="text-xs font-bold text-pnp-navy hover:text-pnp-gold transition-colors tracking-wide"
           >
             View All Reports &rarr;
           </Link>
@@ -339,7 +340,7 @@ export default function DashboardHome() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-gray-50 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-200">
+              <tr className="bg-gray-50 text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-200 select-none">
                 <th className="px-6 py-3.5">Report ID</th>
                 <th className="px-6 py-3.5">Incident Type</th>
                 <th className="px-6 py-3.5">Barangay</th>
@@ -350,22 +351,22 @@ export default function DashboardHome() {
                 <th className="px-6 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 text-sm">
+            <tbody className="divide-y divide-gray-150 text-xs">
               {recentReports.map((report) => (
                 <tr
                   key={report.id}
                   className="hover:bg-gray-50/50 transition-colors"
                 >
-                  <td className="px-6 py-4 font-mono font-bold text-xs text-gray-600">
+                  <td className="px-6 py-4 font-mono font-bold text-xs text-slate-500">
                     {report.id}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900">
+                  <td className="px-6 py-4 font-semibold text-gray-900">
                     {report.type}
                   </td>
-                  <td className="px-6 py-4 text-gray-500">{report.barangay}</td>
+                  <td className="px-6 py-4 text-gray-600">{report.barangay}</td>
                   <td className="px-6 py-4">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getSeverityClass(
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getSeverityClass(
                         report.severity
                       )}`}
                     >
@@ -374,7 +375,7 @@ export default function DashboardHome() {
                   </td>
                   <td className="px-6 py-4">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getStatusClass(
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getStatusClass(
                         report.status
                       )}`}
                     >
@@ -383,7 +384,7 @@ export default function DashboardHome() {
                   </td>
                   <td className="px-6 py-4">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationClass(
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getVerificationClass(
                         report.verificationStatus
                       )}`}
                     >
@@ -391,13 +392,13 @@ export default function DashboardHome() {
                       {getVerificationLabel(report.verificationStatus)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-xs text-gray-400">
+                  <td className="px-6 py-4 text-slate-400">
                     {formatDate(report.dateSubmitted)}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <Link
                       to={`/dashboard/reports/${report.id}`}
-                      className="px-3 py-1.5 bg-gray-100 hover:bg-pnp-navy hover:text-white text-gray-600 text-xs font-semibold rounded transition-colors"
+                      className="px-3 py-1.5 bg-gray-100 hover:bg-pnp-navy hover:text-white text-gray-700 text-xs font-semibold rounded border border-gray-200 transition-colors"
                     >
                       Review
                     </Link>

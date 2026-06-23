@@ -214,41 +214,41 @@ export default function ReportDetailPage() {
   const getStatusColor = (status) => {
     switch (status) {
       case 'Pending':
-        return 'bg-amber-100 text-amber-800';
+        return 'bg-amber-50 text-amber-800 border border-amber-250/70';
       case 'Assigned':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-50 text-blue-800 border border-blue-250/70';
       case 'In Progress':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-orange-50 text-orange-850 border border-orange-250/70';
       case 'Resolved':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-50 text-emerald-800 border border-emerald-250/70';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
   const getSeverityColor = (severity) => {
     switch (severity) {
       case 'Low':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-slate-50 text-slate-700 border border-slate-200';
       case 'Medium':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-50 text-yellow-800 border border-yellow-250/70';
       case 'High':
-        return 'bg-orange-100 text-orange-850';
+        return 'bg-orange-50 text-orange-800 border border-orange-250/70';
       case 'Critical':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-50 text-red-800 border border-red-250/70';
       default:
-        return 'bg-gray-150 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
   const getVerificationColor = (status) => {
     switch (status) {
       case 'verified':
-        return 'bg-emerald-100 text-emerald-800';
+        return 'bg-emerald-50 text-emerald-800 border border-emerald-200';
       case 'hoax':
-        return 'bg-rose-100 text-rose-800';
+        return 'bg-rose-50 text-rose-800 border border-rose-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border border-gray-200';
     }
   };
 
@@ -280,9 +280,9 @@ export default function ReportDetailPage() {
       <div className="flex items-center gap-4">
         <Link
           to="/dashboard/reports"
-          className="p-2 bg-white rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 transition-colors shadow-sm"
+          className="p-2 bg-white rounded border border-gray-200 text-gray-500 hover:text-gray-900 transition-colors shadow-sm"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
           <div className="flex flex-wrap items-center gap-3">
@@ -290,28 +290,28 @@ export default function ReportDetailPage() {
               {report.id}
             </span>
             <span
-              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getSeverityColor(
+              className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getSeverityColor(
                 report.severity
               )}`}
             >
               {report.severity} Severity
             </span>
             <span
-              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getStatusColor(
+              className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getStatusColor(
                 report.status
               )}`}
             >
               {report.status}
             </span>
             <span
-              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getVerificationColor(
+              className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${getVerificationColor(
                 report.verificationStatus
               )}`}
             >
               {getVerificationLabel(report.verificationStatus)}
             </span>
           </div>
-          <h2 className="text-xl font-bold text-pnp-navy mt-1">
+          <h2 className="text-lg font-bold text-pnp-navy mt-1 tracking-tight">
             {report.type} at Brgy. {report.barangay}
           </h2>
         </div>
@@ -321,12 +321,12 @@ export default function ReportDetailPage() {
         {/* Left: Detailed Information */}
         <div className="lg:col-span-8 space-y-6">
           {/* Main info card */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-6">
+          <div className="bg-white p-6 rounded border border-gray-200 shadow-sm space-y-6">
             {report.verificationStatus && report.verificationStatus !== 'unverified' && (
-              <div className={`p-4 rounded-xl border flex gap-3 ${
+              <div className={`p-4 rounded border flex gap-3 ${
                 report.verificationStatus === 'verified'
-                  ? 'bg-emerald-50 border-emerald-250 text-emerald-800'
-                  : 'bg-rose-50 border-rose-250 text-rose-800'
+                  ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                  : 'bg-rose-50 border-rose-200 text-rose-800'
               }`}>
                 <ShieldCheck className={`w-5 h-5 shrink-0 mt-0.5 ${
                   report.verificationStatus === 'verified' ? 'text-emerald-600' : 'text-rose-600'
@@ -346,10 +346,10 @@ export default function ReportDetailPage() {
             )}
 
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 mb-3">
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 mb-3">
                 Incident Description
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-xl border border-gray-150">
+              <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 p-4 rounded border border-gray-200">
                 {report.description}
               </p>
             </div>
@@ -436,9 +436,9 @@ export default function ReportDetailPage() {
           </div>
 
           {/* Leaflet GPS map card */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col h-80">
-            <div className="p-4 border-b border-gray-150 flex items-center justify-between">
-              <span className="text-xs font-bold text-pnp-navy uppercase tracking-wider flex items-center gap-1.5">
+          <div className="bg-white rounded border border-gray-200 shadow-sm overflow-hidden flex flex-col h-80">
+            <div className="p-4 border-b border-gray-200 bg-gray-50/50 flex items-center justify-between">
+              <span className="text-[10px] font-bold text-pnp-navy uppercase tracking-wider flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-pnp-gold" />
                 GPS Incident Coordinates
               </span>
@@ -469,8 +469,8 @@ export default function ReportDetailPage() {
           </div>
 
           {/* Case Timeline / Audit Log */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 mb-6 flex items-center gap-2">
+          <div className="bg-white p-6 rounded border border-gray-200 shadow-sm">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 mb-6 flex items-center gap-2">
               <ShieldAlert className="w-4 h-4 text-pnp-gold" />
               Incident Audit Timeline & Case Logs
             </h3>
@@ -479,7 +479,7 @@ export default function ReportDetailPage() {
               {auditLog.map((log, index) => (
                 <div key={index} className="relative pl-6">
                   {/* Timeline dot */}
-                  <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-pnp-navy border-2 border-white ring-4 ring-pnp-navy/10" />
+                  <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-pnp-navy border border-white" />
 
                   <div>
                     <span className="text-[10px] text-gray-400 font-mono">
@@ -502,20 +502,20 @@ export default function ReportDetailPage() {
         {/* Right: Actions Panel */}
         <div className="lg:col-span-4 space-y-6">
           {/* Dispatch & status card */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-5">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100">
+          <div className="bg-white p-6 rounded border border-gray-200 shadow-sm space-y-5">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100">
               Case Coordination
             </h3>
 
             {/* Officer assignment selection */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
                 Assign Police Officer
               </label>
               <select
                 value={selectedOfficer}
                 onChange={(e) => setSelectedOfficer(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-gray-700 bg-gray-50"
+                className="w-full px-3 py-2 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy text-gray-750 bg-gray-50"
               >
                 <option value="">-- Select Field Officer --</option>
                 {officers.map((o) => (
@@ -528,7 +528,7 @@ export default function ReportDetailPage() {
 
             {/* Status updates */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
                 Set Report Status
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -537,7 +537,7 @@ export default function ReportDetailPage() {
                     key={st}
                     type="button"
                     onClick={() => setSelectedStatus(st)}
-                    className={`py-2 px-3 border rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                    className={`py-2 px-3 border rounded text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
                       selectedStatus === st
                         ? 'bg-pnp-navy text-white border-pnp-navy shadow-sm'
                         : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
@@ -552,7 +552,7 @@ export default function ReportDetailPage() {
 
             {/* Audit log note input */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
                 Action Notes / Remarks
               </label>
               <textarea
@@ -560,7 +560,7 @@ export default function ReportDetailPage() {
                 onChange={(e) => setTimelineNotes(e.target.value)}
                 placeholder="Include dispatch coordinates, details of resolution, or officer notes..."
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-gray-700 bg-gray-50 resize-none"
+                className="w-full px-3 py-2 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy text-gray-750 bg-gray-50 resize-none"
               />
             </div>
 
@@ -569,7 +569,7 @@ export default function ReportDetailPage() {
               <button
                 type="button"
                 onClick={handleUpdate}
-                className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded-lg transition-colors shadow-sm text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded transition-colors shadow-sm text-xs"
               >
                 Update Report
               </button>
@@ -577,34 +577,34 @@ export default function ReportDetailPage() {
           </div>
 
           {/* Incident Verification assessment card */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-5">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 flex items-center gap-2">
+          <div className="bg-white p-6 rounded border border-gray-200 shadow-sm space-y-5">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-pnp-navy pb-2 border-b border-gray-100 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-pnp-gold" />
               Incident Verification
             </h3>
 
             {/* Verification status selection */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
                 Assessment Status
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { value: 'unverified', label: 'Unverified', color: 'border-gray-200 text-gray-650' },
-                  { value: 'verified', label: 'Real Incident', color: 'border-emerald-250 text-emerald-705' },
-                  { value: 'hoax', label: 'Fake / Hoax', color: 'border-rose-250 text-rose-705' }
+                  { value: 'unverified', label: 'Unverified', color: 'border-gray-200 text-gray-600' },
+                  { value: 'verified', label: 'Real Incident', color: 'border-emerald-250 text-emerald-700' },
+                  { value: 'hoax', label: 'Fake / Hoax', color: 'border-rose-250 text-rose-700' }
                 ].map((item) => (
                   <button
                     key={item.value}
                     type="button"
                     onClick={() => setSelectedVerification(item.value)}
-                    className={`py-2 px-1.5 border rounded-lg text-[10px] font-bold transition-all text-center ${
+                    className={`py-2 px-1.5 border rounded text-[10px] font-bold transition-all text-center ${
                       selectedVerification === item.value
                         ? item.value === 'verified'
                           ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
                           : item.value === 'hoax'
                             ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
-                            : 'bg-gray-650 text-white border-gray-650 shadow-sm'
+                            : 'bg-gray-600 text-white border-gray-650 shadow-sm'
                         : `bg-white hover:bg-gray-50 ${item.color}`
                     }`}
                   >
@@ -616,7 +616,7 @@ export default function ReportDetailPage() {
 
             {/* Verification remarks */}
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+              <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
                 Verification Remarks
               </label>
               <textarea
@@ -624,7 +624,7 @@ export default function ReportDetailPage() {
                 onChange={(e) => setVerificationRemarks(e.target.value)}
                 placeholder="Detail the outcome of verification calls, dispatch confirmations, or source validation..."
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/20 focus:border-pnp-navy text-gray-700 bg-gray-50 resize-none"
+                className="w-full px-3 py-2 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-pnp-navy/10 focus:border-pnp-navy text-gray-750 bg-gray-50 resize-none"
               />
             </div>
 
@@ -633,7 +633,7 @@ export default function ReportDetailPage() {
               <button
                 type="button"
                 onClick={handleVerify}
-                className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded-lg transition-colors shadow-sm text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-pnp-navy hover:bg-pnp-navy-light text-white font-semibold py-2.5 px-4 rounded transition-colors shadow-sm text-xs"
               >
                 Save Verification
               </button>
@@ -641,12 +641,12 @@ export default function ReportDetailPage() {
           </div>
 
           {/* Quick reference guide */}
-          <div className="bg-gray-50 p-5 rounded-2xl border border-gray-150 shadow-sm">
-            <h4 className="text-xs font-bold text-pnp-navy uppercase tracking-wider flex items-center gap-1.5">
+          <div className="bg-gray-50 p-5 rounded border border-gray-200 shadow-sm">
+            <h4 className="text-[10px] font-bold text-pnp-navy uppercase tracking-wider flex items-center gap-1.5">
               <Info className="w-4 h-4 text-pnp-gold" />
               Standard Operating Procedure
             </h4>
-            <ul className="text-[11px] text-gray-500 space-y-2 leading-relaxed">
+            <ul className="text-[10px] text-gray-500 space-y-2 leading-relaxed">
               <li className="flex gap-1.5">
                 <span className="font-bold text-pnp-navy">1. Review Details:</span> Check submitted photos, location accuracy, and severity ranking.
               </li>

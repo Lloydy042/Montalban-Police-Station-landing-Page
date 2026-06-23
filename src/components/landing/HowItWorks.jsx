@@ -57,17 +57,17 @@ export default function HowItWorks() {
               )}
 
               {/* Number circle */}
-              <div className="relative z-10 w-16 h-16 rounded-full bg-pnp-navy flex items-center justify-center mb-5 shadow-lg shadow-pnp-navy/20">
-                <Icon className="w-7 h-7 text-pnp-gold" />
+              <div className="relative z-10 w-16 h-16 rounded-full bg-pnp-navy flex items-center justify-center mb-5 shadow-md border border-pnp-gold/20">
+                <Icon className="w-6 h-6 text-pnp-gold" />
               </div>
 
               {/* Step number */}
-              <span className="text-xs font-bold text-pnp-gold tracking-widest uppercase mb-2">
+              <span className="text-xs font-extrabold text-pnp-gold-dark tracking-widest uppercase mb-2">
                 Step {number}
               </span>
 
-              <h3 className="text-lg font-semibold text-pnp-navy mb-3">{title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-xs">{description}</p>
+              <h3 className="text-lg font-bold text-pnp-navy mb-3">{title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xs">{description}</p>
 
               {/* Mobile connector arrow */}
               {i < steps.length - 1 && (
