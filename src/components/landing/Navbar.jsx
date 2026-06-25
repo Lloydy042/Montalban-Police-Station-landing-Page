@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Shield, Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -68,12 +67,6 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Link
-              to="/login"
-              className="ml-3 inline-flex items-center px-5 py-2 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-bold rounded-md transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-pnp-gold focus-visible:ring-offset-2 outline-none cursor-pointer"
-            >
-              Login
-            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -105,13 +98,6 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <Link
-            to="/login"
-            onClick={() => setMobileOpen(false)}
-            className="block mt-2 text-center px-5 py-2.5 bg-pnp-gold hover:bg-pnp-gold-dark text-pnp-navy text-sm font-bold rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-pnp-gold outline-none cursor-pointer"
-          >
-            Login
-          </Link>
         </div>
       </div>
     </nav>
